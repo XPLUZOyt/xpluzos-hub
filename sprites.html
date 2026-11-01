@@ -444,6 +444,31 @@ defaultSprites.push({
     variant: "Base",
     image: "images/sweet-dreams-base.png"
 });
+
+    spriteBases.forEach(base => {
+
+    variants.forEach(v => {
+
+        const imageName =
+        `${v.prefix ? v.prefix.toLowerCase() + "-" : ""}${base
+            .toLowerCase()
+            .replace(/'/g,"")
+            .replace(/\./g,"")
+            .replace(/\s+/g,"-")
+        }.png`;
+
+        defaultSprites.push({
+            id: spriteId++,
+            name: v.prefix
+                ? `${v.prefix} ${base}`
+                : base,
+            variant: v.variant,
+            image: `images/${imageName}`
+        });
+
+    });
+
+});
 let sprites = [];
 
 try{
