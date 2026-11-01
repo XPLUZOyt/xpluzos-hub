@@ -518,32 +518,17 @@ placeholder="Search Sprite">
 <script>
 
 const spriteBases = [
-    "Jonesy",
-    "Adventure",
-    "Bush",
-    "Sonic",
-    "Tails",
-    "Shadow",
-    "8-Bit",
-    "Jackrabbit",
-    "Crown",
-    "Killswitch",
-    "Klombo",
-    "Overshield",
-    "X-Ray",
-    "Onigiri",
-    "Storm Scout",
-    "Blinky",
-    "Birthday",
-    "Crash Bandicoot",
-    "Pond",
-    "Morgana",
-    "Spooky Dash",
-    "Vampire",
-    "The Deer",
-    "Dumpster Dive",
-    "Honey",
-    "One Wish Willow"
+    "Halfpeel'd",
+    "Re-Pete",
+    "Barry O'Fish",
+    "Chester",
+    "Exmarks",
+    "Wayfinder",
+    "Kelper",
+    "Lil' Squibbly",
+    "Lil' Flacko",
+    "Lil' Uzi Vert Jr.",
+    "Plundarrgh"
 ];
 
 const variants = [
@@ -552,84 +537,30 @@ const variants = [
         variant:"Base"
     },
     {
-        prefix:"Gold ",
-        variant:"Gold"
+        prefix:"Fortune",
+        variant:"For"
     },
     {
-        prefix:"Cheat Master ",
-        variant:"Cheat"
-    },
-    {
-        prefix:"Loot Hacker ",
-        variant:"Hacker"
-    },
-    {
-        prefix:"Bounty Hunter ",
-        variant:"Hunter"
-    },
-    {
-        prefix:"Trick or Treat ",
-        variant:"Trick"
+        prefix:"Cursed",
+        variant:"Cur"
     }
 ];
 
 let spriteId = 1;
 
 const defaultSprites = [];
-
-const quackBases = [
-    "Jonesy",
-    "Adventure",
-    "Bush",
-    "Klombo",
-    "Spooky Dash"
-];
-
-spriteBases.forEach(base => {
-
-    variants.forEach(v => {
-
-        defaultSprites.push({
-
-            id: spriteId++,
-
-            name: v.prefix + base,
-
-            variant: v.variant,
-
-            image: `images/${base
-                .toLowerCase()
-                .replace(/\s+/g, "-")}-${v.variant.toLowerCase()}.png`
-
-        });
-
-    });
-
-    if (quackBases.includes(base)) {
-
-        defaultSprites.push({
-
-            id: spriteId++,
-
-            name: `Quack ${base}`,
-
-            variant: "Quack",
-
-            image: `images/${base
-                .toLowerCase()
-                .replace(/\s+/g, "-")}-quack.png`
-
-        });
-
-    }
-
-});
-
 defaultSprites.push({
     id: spriteId++,
-    name: "Mega Man",
+    name: "Transponder Snail",
     variant: "Base",
-    image: "images/mega-man-base.png"
+    image: "images/transporter-snail-base.png"
+});
+    
+defaultSprites.push({
+    id: spriteId++,
+    name: "Sweet Dreams",
+    variant: "Base",
+    image: "images/sweet-dreams-base.png"
 });
 let sprites =
 JSON.parse(
