@@ -562,12 +562,16 @@ defaultSprites.push({
     variant: "Base",
     image: "images/sweet-dreams-base.png"
 });
-let sprites =
-JSON.parse(
-    localStorage.getItem(
-        "spriteCollection"
-    )
-);
+let sprites = [];
+
+try{
+    sprites =
+    JSON.parse(
+        localStorage.getItem("spriteCollection")
+    ) || [];
+}catch{
+    sprites = [];
+}
 
 if(!sprites || sprites.length < defaultSprites.length){
 
@@ -775,7 +779,9 @@ s=>s.id===id
 );
 
 sprite.owned =
-!sprite.owned;
+if(!sprite.owned){
+    sprite.mastered=false;
+}
 
 saveSprites();
 
@@ -784,19 +790,18 @@ render();
 }
 
 function toggleMastered(id){
+    const sprite =
+    sprites.find(s=>s.id===id);
 
-const sprite =
-sprites.find(
-s=>s.id===id
-);
+    if(!sprite.owned){
+        alert("You must own a sprite before mastering it.");
+        return;
+    }
 
-sprite.mastered =
-!sprite.mastered;
+    sprite.mastered = !sprite.mastered;
 
-saveSprites();
-
-render();
-
+    saveSprites();
+    render();
 }
 
 document
