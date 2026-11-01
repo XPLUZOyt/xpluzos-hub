@@ -45,14 +45,10 @@ select{
 }
     body,
 .card,
-.menu-content,
 input,
 select,
 .back,
 .theme-toggle,
-.top-menu-btn,
-.reward-badge,
-.used-badge,
 .progress-track,
 .progress-fill,
 .mastered-fill{
@@ -260,107 +256,20 @@ h1{
     margin-bottom:30px;
 }
 .top-menu-btn{
-position:fixed;
-top:15px;
-left:50%;
-transform:translateX(-50%);
-z-index:1001;
-background:#182050;
-color:#fff;
-border:1px solid rgba(255,255,255,.15);
-padding:12px 20px;
-border-radius:14px;
-cursor:pointer;
-font-weight:700;
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:1001;
+    background:#182050;
+    color:#fff;
+    border:1px solid rgba(255,255,255,.15);
+    padding:12px 20px;
+    border-radius:14px;
+    cursor:pointer;
+    font-weight:700;
 }
 
-.sprite-menu{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.78);
-backdrop-filter:blur(8px);
-display:none;
-justify-content:center;
-align-items:flex-start;
-overflow:auto;
-z-index:1000;
-padding-top:80px;
-}
-
-.menu-content{
-width:min(900px,95%);
-background:linear-gradient(180deg,#1c2158,#181b26);
-border-radius:20px;
-padding:25px;
-border:1px solid rgba(255,255,255,.1);
-box-shadow:0 0 40px rgba(80,120,255,.25);
-position:relative;
-overflow:hidden;
-}
-
-.menu-content::before{
-content:"";
-position:absolute;
-inset:0;
-background:repeating-linear-gradient(
-0deg,
-transparent,
-transparent 2px,
-rgba(255,255,255,.02) 3px
-);
-pointer-events:none;
-}
-
-.menu-content h2{
-text-align:center;
-margin-bottom:20px;
-}
-
-.menu-sprite{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-border-radius:18px;
-padding:18px;
-margin-bottom:14px;
-transition:.2s;
-}
-
-.menu-sprite:hover{
-border-color:rgba(102,255,102,.5);
-background:rgba(255,255,255,.08);
-}
-
-.menu-sprite-name{
-color:#d5d5d5;
-text-decoration:line-through;
-}
-
-.used-badge{
-background:#252535;
-padding:6px 12px;
-border-radius:999px;
-font-size:.8rem;
-font-weight:700;
-}
-
-.reward-badge{
-background:rgba(255,255,255,.12);
-padding:6px 12px;
-border-radius:8px;
-font-size:.85rem;
-}
-
-.close-btn{
-margin-top:20px;
-width:100%;
-border:none;
-padding:12px;
-background:#39ff88;
-color:#000;
-border-radius:12px;
-font-weight:700;
-cursor:pointer;
-}
 .theme-toggle{
 position:absolute;
 top:20px;
@@ -420,37 +329,10 @@ color:#00263d;
 </head>
 
 <body>
-    <button id="menuBtn" class="top-menu-btn">🎮 Codes</button>
+    <button id="updateBtn" class="top-menu-btn">🔄 Update</button>
     <button id="themeToggle" class="theme-toggle">
 ☀️ Light Mode
 </button>
-
-<div id="spriteMenu" class="sprite-menu">
-    <div class="menu-content">
-        <h2>SPRITES</h2>
-
-<button
-id="hideUsedBtn"
-style="
-width:100%;
-margin-bottom:15px;
-padding:10px;
-border:none;
-border-radius:12px;
-background:#2c6f35;
-color:white;
-font-weight:700;
-cursor:pointer;
-"
-onclick="toggleHideUsed()"
->
-Hide Used: OFF
-</button>
-
-<div id="menuSpriteList"></div>
-        <button class="close-btn" onclick="closeMenu()">Close</button>
-    </div>
-</div>
 
 <a href="index.html" class="back">
     ⬅ Back To Home
@@ -553,7 +435,7 @@ defaultSprites.push({
     id: spriteId++,
     name: "Transponder Snail",
     variant: "Base",
-    image: "images/transporter-snail-base.png"
+    image: "images/transponder-snail-base.png"
 });
     
 defaultSprites.push({
@@ -711,7 +593,7 @@ Quack:"#b784ff"
 };
 
 card.style.border =
-`2px solid ${borders[sprite.variant]}`;
+`2px solid ${borders[sprite.variant] || "#444"}`;
 
 card.innerHTML =
 
@@ -773,20 +655,19 @@ updateStats();
 
 function toggleOwned(id){
 
-const sprite =
-sprites.find(
-s=>s.id===id
-);
+    const sprite =
+    sprites.find(
+        s => s.id === id
+    );
 
-sprite.owned =
-if(!sprite.owned){
-    sprite.mastered=false;
-}
+    sprite.owned = !sprite.owned;
 
-saveSprites();
+    if(!sprite.owned){
+        sprite.mastered = false;
+    }
 
-render();
-
+    saveSprites();
+    render();
 }
 
 function toggleMastered(id){
@@ -817,9 +698,6 @@ document
 "change",
 render
 );
-    const menuBtn=document.getElementById("menuBtn");
-const spriteMenu=document.getElementById("spriteMenu");
-const menuSpriteList=document.getElementById("menuSpriteList");
     const themeToggle=
 document.getElementById("themeToggle");
 
@@ -843,224 +721,7 @@ themeToggle.textContent=
 
 }
 
-    let usedCodes=
-JSON.parse(
-localStorage.getItem("usedCodes")
-) || [];
-    let hideUsed=false;
-
-function saveUsedCodes(){
-localStorage.setItem(
-"usedCodes",
-JSON.stringify(usedCodes)
-);
-}
-
-function toggleCode(code){
-
-if(usedCodes.includes(code)){
-usedCodes=usedCodes.filter(
-c=>c!==code
-);
-}else{
-usedCodes.push(code);
-}
-
-saveUsedCodes();
-openMenu();
-
-}
-    function toggleHideUsed(){
-
-hideUsed=!hideUsed;
-
-openMenu();
-
-}
-
-menuBtn.addEventListener("click",openMenu);
-
-function openMenu(){
-
-const hideBtn=
-document.getElementById("hideUsedBtn");
-
-if(hideBtn){
-
-hideBtn.textContent=
-hideUsed
-? "Hide Used: ON"
-: "Hide Used: OFF";
-
-hideBtn.style.background=
-hideUsed
-? "#ff5c5c"
-: "#2c6f35";
-
-}
-
-menuSpriteList.innerHTML="";
-
-const codes = [
-{code:"JonesyIsGolden",reward:"Gold Jonesy Sprite"},
-{code:"Born2Play",reward:"Cheat Master Adventure Sprite"},
-{code:"8BitBlast",reward:"Cheat Master 8-Bit Sprite"},
-{code:"GottaGoFast",reward:"Cheat Master Sonic Sprite"},
-{code:"IWannaFlyHigh",reward:"Cheat Master Tails Sprite"},
-{code:"Play4All",reward:"Cheat Master Jonesy Sprite"},
-{code:"GatherAndCraft",reward:"Cheat Master Bush Sprite",note:"Finish the required Wrixel's Get Crafty story quests first"},
-{code:"WeAreTheWorldChampionsToday",reward:"FNCS Sentry BackBling"},
-{code:"9Years",reward:"9th Birthday Sprite Spray"},
-{code:"SAYH12WR1X3L",reward:"Wrixel's Hero Portrait Spray"},
-{code:"YourThoughtsAreMine",reward:"Void Master Geno style + 5,000 Sprite Dust",note:"Progress to the final Geno: The Ultimate Reality story quest, then shoot Geno's shield and let him eliminate you"},
-{code:"BeMoreAlien",reward:"Override Ready Loading Screen"},
-{code:"ReachYourImpossible",reward:"Block Party Loading Screen"},
-{code:"VeryScaryPumpkin",reward:"3 Snack-O'-Lanterns"},
-{code:"IThinkTheKeyFoundMeChat",reward:"1 Extraction Accelerator"},
-{code:"BoneRattler",reward:"4 Spicy Tacos"},
-{code:"WhoCrackedTheCode",reward:"40,000 XP"},
-{code:"DustySprites",reward:"5,000 Sprite Dust"},
-{code:"AlmostScaringSeason",reward:"2 Cheat Code Locators"},
-{code:"PlayToLevelUp",reward:"2,000 Sprite Dust"},
-{code:"ChatFindMeAnotherCode",reward:"2 Cheat Code Locators"},
-{code:"NOCTURNEOP55N1",reward:"2 Extraction Accelerators"},
-{code:"DestinyAwaits",reward:"2 Llama Supply Drops"},
-{code:"BlinkyInkyPinkyClyde",reward:"5,000 Sprite Dust"},
-{code:"BeamMeUp",reward:"2 Extraction Accelerators"},
-{code:"DustInTheWind",reward:"5,000 Sprite Dust"},
-{code:"NoProLlama",reward:"1 Llama Supply Drop"},
-{code:"WhereIsTheDustyTree",reward:"5,000 Sprite Dust"},
-{code:"ChatWhereDoYouFindTheKey",reward:"2 Extraction Accelerators"},
-{code:"InvalidCheat",reward:"2 Cheat Code Locators"},
-{code:"H0p0nVC",reward:"2,000 Sprite Dust"},
-{code:"OverrideXP",reward:"40,000 XP"},
-{code:"Magilume",reward:"2,000 Sprite Dust"},
-{code:"Chispambo",reward:"2,000 Sprite Dust"},
-{code:"Abgestaubt",reward:"2,000 Sprite Dust"},
-{code:"PerlimPinPin",reward:"2,000 Sprite Dust"},
-{code:"SurviveTheNight",reward:"2 Cheat Code Locators"},
-{code:"FindItChat",reward:"2 Cheat Code Locators"},
-{code:"TakeYourHeart",reward:"2 Extraction Accelerators"},
-{code:"PerfectOrder",reward:"4 Spicy Tacos"},
-{code:"O2Override",reward:"1 Llama Supply Drop & 1 Portable Extractor"},
-{code:"CrowsAreAfraid",reward:"Turns you into a Scarecrow"},
-{code:"S7H-50P-R03",reward:"Plays Geno's story quest",note:"Finish the Geno: The Ultimate Reality story quest first"},
-{code:"PumpkinSpiceLife",reward:"Turns you into a Pumpkin"},
-{code:"PowerOut",reward:"FNAF Jumpscare"},
-{code:"BRB",reward:"Turns you into a Toilet"},
-{code:"InsertCoinToContinue",reward:"Turns you into an Arcade Machine"},
-{code:"DontBlockMe",reward:"Turns you into a Tetrimino"},
-{code:"LetsBlockAndRoll",reward:"Turns you into a Tetrimino"},
-{code:"LUHLEAKYZ", reward:"Plays Time Passed JamTrack"},
-{code:"PR1VAT3J3T", reward:"Plays MARCHING Jamtrack"},
-{code:"B1GBODYSW3RVE", reward:"Plays Lil Krazy jamtrack"}
-];
-
-menuSpriteList.innerHTML = "";
-
-codes.forEach(item=>{
-
-if(
-hideUsed &&
-usedCodes.includes(item.code)
-){
-return;
-}
-
-const row=document.createElement("div");
-
-row.className="menu-sprite";
-
-if(usedCodes.includes(item.code)){
-row.style.opacity=".55";
-}
-    
-row.innerHTML=`
-
-<div style="display:flex;flex-direction:column;gap:8px;width:100%;">
-
-<div style="display:flex;align-items:center;gap:12px;">
-
-<div style="width:8px;height:8px;background:#66ff66;border-radius:50%;"></div>
-
-<div
-onclick="toggleCode('${item.code}')"
-style="
-font-family:monospace;
-font-size:18px;
-cursor:pointer;
-text-decoration:${
-usedCodes.includes(item.code)
-? 'line-through'
-: 'none'
-};
-opacity:${
-usedCodes.includes(item.code)
-? '.45'
-: '1'
-};
-"
->
-${item.code}
-</div>
-
-<div
-class="used-badge"
-onclick="toggleCode('${item.code}')"
-style="
-cursor:pointer;
-background:${
-usedCodes.includes(item.code)
-? '#505050'
-: '#2c6f35'
-};
-color:white;
-"
->
-${usedCodes.includes(item.code)
-? 'Used'
-: 'Active'}
-</div>
-
-<div class="reward-badge">
-🎁 ${item.reward}
-</div>
-
-</div>
-
-${item.note ? `
-<div style="
-margin-left:20px;
-color:#c7c7c7;
-font-size:14px;
-line-height:1.4;
-">
-${item.note}
-</div>
-` : ""}
-
-</div>
-
-`;
-
-menuSpriteList.appendChild(row);
-
-});
-
-spriteMenu.style.display="flex";
-
-}
-
-function closeMenu(){
-spriteMenu.style.display="none";
-}
-
-spriteMenu.addEventListener("click",e=>{
-if(e.target===spriteMenu){
-closeMenu();
-}
-});
-    themeToggle.addEventListener(
+themeToggle.addEventListener(
 "click",
 ()=>{
 
@@ -1093,6 +754,28 @@ lightMode
 
 }
 );
+
+const updateBtn =
+document.getElementById("updateBtn");
+
+updateBtn.addEventListener("click", () => {
+
+    if(!confirm(
+        "This will reset all saved data. Continue?"
+    )){
+        return;
+    }
+
+    localStorage.removeItem(
+        "spriteCollection"
+    );
+
+    localStorage.removeItem(
+        "lightMode"
+    );
+
+    location.reload();
+});
 async function exportSpriteSheet(type){
 
     let filteredSprites = [];
