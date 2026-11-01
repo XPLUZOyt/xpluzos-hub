@@ -431,21 +431,9 @@ const variants = [
 let spriteId = 1;
 
 const defaultSprites = [];
-defaultSprites.push({
-    id: spriteId++,
-    name: "Transponder Snail",
-    variant: "Base",
-    image: "images/transponder-snail-base.png"
-});
-    
-defaultSprites.push({
-    id: spriteId++,
-    name: "Sweet Dreams",
-    variant: "Base",
-    image: "images/sweet-dreams-base.png"
-});
 
-    spriteBases.forEach(base => {
+// Generate all spriteBases first
+spriteBases.forEach(base => {
 
     variants.forEach(v => {
 
@@ -468,6 +456,21 @@ defaultSprites.push({
 
     });
 
+});
+
+// Add special sprites LAST
+defaultSprites.push({
+    id: spriteId++,
+    name: "Transponder Snail",
+    variant: "Base",
+    image: "images/transponder-snail-base.png"
+});
+
+defaultSprites.push({
+    id: spriteId++,
+    name: "Sweet Dreams",
+    variant: "Base",
+    image: "images/sweet-dreams-base.png"
 });
 let sprites = [];
 
