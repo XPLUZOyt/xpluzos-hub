@@ -4,926 +4,128 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Event Tracker</title>
-
 <style>
-:root{
-    --background:#030806;
-    --background-2:#07130c;
-
-    --card:rgba(10,30,18,.72);
-    --card-hover:rgba(13,42,24,.85);
-
-    --green:#39ff88;
-    --green-light:#8affb9;
-    --green-dark:#13b85c;
-
-    --white:#f2fff6;
-    --text:#d8e9dd;
-    --muted:#91a69a;
-
-    --border:rgba(57,255,136,.15);
-    --border-hover:rgba(57,255,136,.5);
-
-    --glow:rgba(57,255,136,.25);
-    --yellow:#f4d35e;
-    --purple:#b98ce8;
-    --purple-dark:#6b3a8a;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI, sans-serif;
-}
-
-body{
-    font-family:"Inter",sans-serif;
-    background:
-        radial-gradient(circle at 15% 10%,
-            rgba(57,255,136,.09),
-            transparent 30%),
-        radial-gradient(circle at 85% 50%,
-            rgba(19,184,92,.08),
-            transparent 30%),
-        linear-gradient(
-            180deg,
-            var(--background),
-            var(--background-2),
-            var(--background)
-        );
-    color:var(--white);
-}
-
-.card{
-    background:var(--card);
-    border:1px solid var(--border);
-    backdrop-filter:blur(15px);
-    border-radius:20px;
-    transition:.3s;
-}
-
-.card:hover{
-    border-color:var(--border-hover);
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.25),
-        0 0 30px rgba(57,255,136,.04);
-}
-
-.badge{
-    background:rgba(57,255,136,.08);
-    color:var(--green);
-    border:1px solid var(--border);
-    border-radius:50px;
-    font-weight:800;
-    letter-spacing:1px;
-}
-
-.countdown{
-    color:var(--white);
-    text-shadow:
-        0 0 20px rgba(57,255,136,.2);
-}
-
-.subtitle{
-    color:var(--muted);
-}
-
-.section-title{
-    color:var(--white);
-}
-
-.section-desc{
-    color:var(--muted);
-}
-
-.event{
-    border-top:1px solid var(--border);
-}
-
-.status{
-    background:rgba(57,255,136,.08);
-    color:var(--green);
-    border:1px solid var(--border);
-}
-
-.multiplier{
-    color:var(--green);
-    font-weight:800;
-}
-
-.live{
-    color:var(--green);
-    text-shadow:0 0 10px var(--green);
-}
-
-.odds-row{
-    border-top:1px solid var(--border);
-}
-
-.odds{
-    color:var(--white);
-    font-weight:800;
-}
-
-.event-list::-webkit-scrollbar{
-    width:8px;
-}
-
-.event-list::-webkit-scrollbar-track{
-    background:transparent;
-}
-
-.event-list::-webkit-scrollbar-thumb{
-    background:rgba(57,255,136,.2);
-    border-radius:20px;
-}
-
-.event-list::-webkit-scrollbar-thumb:hover{
-    background:rgba(57,255,136,.4);
-}
-
-.container{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-}
-
-.card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:20px;
-}
-
-.next-hour{
-    display:flex;
-    gap:20px;
-    align-items:center;
-}
-
-.logo{
-    width:120px;
-    height:120px;
-    border-radius:16px;
-    object-fit:cover;
-}
-
-.badge{
-    background:#4b4313;
-    color:var(--yellow);
-    display:inline-block;
-    padding:6px 12px;
-    border-radius:8px;
-    font-weight:700;
-    margin-bottom:10px;
-}
-
-.countdown{
-    font-size:4rem;
-    font-weight:900;
-    margin:10px 0;
-}
-
-.subtitle{
-    color:var(--muted);
-}
-
-.section-title{
-    font-size:1.8rem;
-    margin-bottom:5px;
-}
-
-.section-desc{
-    color:var(--muted);
-    margin-bottom:20px;
-}
-
-.event-list{
-    max-height:450px;
-    overflow-y:auto;
-}
-
-.event{
-    padding:18px 0;
-    border-top:1px solid var(--border);
-}
-
-.event-header{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:12px;
-}
-
-.status{
-    background:#2a2d34;
-    padding:5px 10px;
-    border-radius:8px;
-    font-weight:700;
-    color:#bfc5d1;
-}
-
-.multiplier{
-    color:var(--green);
-    font-weight:700;
-}
-
-.odds-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 0;
-    border-top:1px solid var(--border);
-}
-
-.odds-item{
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.odds-item img{
-    width:52px;
-    height:52px;
-    border-radius:10px;
-}
-
-.odds{
-    font-weight:800;
-}
-
-.live{
-    color:var(--green);
-}
-
-.feature-showcase {
-    margin: 22px 0 22px;
-    background: rgba(10, 15, 13, 0.85);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
-}
-
-.feature-quote {
-    padding: 18px 20px 8px;
-    font-size: 1.05rem;
-    line-height:1.5;
-    color: rgba(242,255,246,.85);
-    font-weight:400;
-    letter-spacing: .01em;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-
-.feature-quote strong {
-    font-weight: 700;
-}
-
-.feature-banner {
-    position: relative;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    min-height: 150px;
-    padding: 24px 24px 0;
-    background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
-}
-
-.feature-character {
-    position: relative;
-    width: 120px;
-    height: 170px;
-    margin-right: 16px;
-    filter: drop-shadow(0 0 25px rgba(255,255,255,.03));
-}
-
-.feature-character .head {
-    position:absolute;
-    width: 34px;
-    height: 34px;
-    left: 46px;
-    top: 12px;
-    border-radius: 50%;
-    background: linear-gradient(180deg, #ded9d2, #8e857d);
-    box-shadow: inset -6px -4px 0 rgba(0,0,0,.12);
-}
-
-.feature-character .helmet {
-    position:absolute;
-    left: 34px;
-    top: 4px;
-    width: 58px;
-    height: 44px;
-    border-radius: 18px 18px 12px 12px;
-    background: linear-gradient(180deg, #f1f2f4, #8e9aa2);
-    border: 2px solid rgba(0,0,0,.18);
-}
-
-.feature-character .torso {
-    position:absolute;
-    left: 28px;
-    top: 42px;
-    width: 64px;
-    height: 74px;
-    background: linear-gradient(180deg, #1d1f24, #3d4250 30%, #1d1f24);
-    border-radius: 16px 16px 12px 12px;
-    border: 2px solid rgba(255,255,255,.06);
-}
-
-.feature-character .arm {
-    position:absolute;
-    width: 18px;
-    height: 72px;
-    top: 46px;
-    background: linear-gradient(180deg, #d9ddd6, #8a8f8a);
-    border-radius: 14px;
-}
-
-.feature-character .arm.left { left: 10px; transform: rotate(24deg); }
-.feature-character .arm.right { left: 92px; transform: rotate(-24deg); }
-
-.feature-character .leg {
-    position:absolute;
-    width: 18px;
-    height: 58px;
-    top: 110px;
-    background: linear-gradient(180deg, #0d1217, #2a2f36);
-    border-radius: 10px;
-}
-
-.feature-character .leg.left { left: 42px; }
-.feature-character .leg.right { left: 60px; }
-
-.feature-char-title {
-    flex:1;
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:16px;
-    margin-top: 8px;
-}
-
-.feature-week {
-    color: #d9c5ff;
-    font-weight: 900;
-    letter-spacing: 0.38em;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    opacity: 0.9;
-    margin-bottom: 10px;
-}
-
-.feature-name {
-    font-size: clamp(2rem, 4vw, 4rem);
-    line-height: .9;
-    letter-spacing: -0.05em;
-    font-weight: 900;
-    color: #f2f6f5;
-    text-shadow: 0 0 22px rgba(168,140,255,.15);
-    text-transform: uppercase;
-}
-
-.feature-name .highlight {
-    color: #f7d778;
-    text-shadow: 0 0 18px rgba(247,215,120,.28);
-}
-
-.feature-ended {
-    align-self:flex-start;
-    margin-top: 10px;
-    color: rgba(255,255,255,.55);
-    font-size: .7rem;
-    font-weight: 800;
-    letter-spacing: .25em;
-    text-transform: uppercase;
-}
-
-.feature-grid {
-    display:grid;
-    grid-template-columns: 1.15fr 1fr 1fr 1fr 1fr;
-    gap: 12px;
-    padding: 10px 14px 18px;
-}
-
-.feature-card {
-    position:relative;
-    height: 220px;
-    border-radius: 18px;
-    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.01));
-    border: 1px solid rgba(255,255,255,.06);
-    overflow: hidden;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
-}
-
-.feature-card--gold {
-    background: linear-gradient(180deg, #f5d862 0%, #e6c04e 50%, #dfb53d 100%);
-}
-
-.feature-card--purple {
-    background: linear-gradient(180deg, #d8a3ff 0%, #c288ef 52%, #a56ad7 100%);
-}
-
-.feature-card--blue {
-    background: linear-gradient(180deg, #75d7ff 0%, #6db2e8 54%, #5d9bd0 100%);
-}
-
-.feature-card--rose {
-    background: linear-gradient(180deg, #b189d9 0%, #8f5ec8 100%);
-}
-
-.feature-card--lilac {
-    background: linear-gradient(180deg, #d7b0ff 0%, #c7a7fb 38%, #987de1 100%);
-}
-
-.feature-card::before,
-.feature-card::after {
-    content:"";
-    position:absolute;
-    inset:auto;
-}
-
-.feature-card--gold .medal {
-    position:absolute;
-    top: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #fff9d8 0%, #efd57b 18%, #d7af42 40%, #6b4d22 100%);
-    box-shadow: inset 0 0 0 12px rgba(100,68,27,.7), inset 0 0 0 22px rgba(56,37,14,.45), 0 12px 18px rgba(0,0,0,.18);
-}
-
-.feature-card--gold .medal::before,
-.feature-card--gold .medal::after {
-    content:"";
-    position:absolute;
-    inset:12px;
-    border: 12px solid rgba(89,61,13,.63);
-    border-radius:50%;
-}
-
-.feature-card--gold .medal::after {
-    inset: 36px;
-    border-radius: 50%;
-    background: rgba(0,0,0,.08);
-    box-shadow: 0 0 0 10px rgba(93,62,18,.32);
-}
-
-.feature-card--gold .letter {
-    position:absolute;
-    left: 50%;
-    top: 49%;
-    transform: translate(-50%, -50%);
-    font-size: 5rem;
-    font-weight: 900;
-    color: rgba(88,65,25,.78);
-}
-
-.feature-card--gold .rays {
-    position:absolute;
-    left: 50%;
-    top: 50%;
-    width: 160px;
-    height: 160px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: conic-gradient(from 135deg, rgba(110,78,18,0.0) 0 8%, rgba(110,78,18,.85) 8% 10%, rgba(110,78,18,0.0) 10% 18%, rgba(110,78,18,.85) 18% 20%, rgba(110,78,18,0.0) 20% 28%, rgba(110,78,18,.85) 28% 30%, rgba(110,78,18,0.0) 30% 38%, rgba(110,78,18,.85) 38% 40%, rgba(110,78,18,0.0) 40% 48%, rgba(110,78,18,.85) 48% 50%, rgba(110,78,18,0.0) 50% 58%, rgba(110,78,18,.85) 58% 60%, rgba(110,78,18,0.0) 60% 68%, rgba(110,78,18,.85) 68% 70%, rgba(110,78,18,0.0) 70% 78%, rgba(110,78,18,.85) 78% 80%, rgba(110,78,18,0.0) 80% 88%, rgba(110,78,18,.85) 88% 90%, rgba(110,78,18,0.0) 90% 100%);
-    opacity: .92;
-}
-
-.feature-card--purple .weapon,
-.feature-card--blue .weapon,
-.feature-card--rose .weapon,
-.feature-card--lilac .weapon {
-    position:absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 130px;
-    height: 82px;
-    background: linear-gradient(180deg, rgba(255,255,255,.32), rgba(0,0,0,.1));
-    border-radius: 20px;
-    box-shadow: inset 0 0 0 8px rgba(255,255,255,.15);
-}
-
-.feature-card--purple .weapon::before,
-.feature-card--blue .weapon::before,
-.feature-card--rose .weapon::before,
-.feature-card--lilac .weapon::before {
-    content:"";
-    position:absolute;
-    width: 62px;
-    height: 46px;
-    border-radius: 12px;
-    left: 32px;
-    top: 18px;
-    background: linear-gradient(180deg, rgba(214,186,89,.9), rgba(153,107,28,.8));
-    box-shadow: inset 0 0 0 6px rgba(255,255,255,.1);
-}
-
-.feature-card--purple .weapon::after,
-.feature-card--blue .weapon::after,
-.feature-card--rose .weapon::after,
-.feature-card--lilac .weapon::after {
-    content:"";
-    position:absolute;
-    left: 66px;
-    top: 6px;
-    width: 18px;
-    height: 70px;
-    border-radius: 8px;
-    background: linear-gradient(180deg, rgba(255,255,255,.4), rgba(255,255,255,.1));
-}
-
-.feature-card--blue .weapon::before { background: linear-gradient(180deg, rgba(57,255,148,.8), rgba(19,99,92,.8)); }
-.feature-card--rose .weapon::before { background: linear-gradient(180deg, rgba(241, 118, 118, .9), rgba(133, 35, 52, .8)); }
-.feature-card--lilac .weapon::before { background: linear-gradient(180deg, rgba(255, 203, 119, .9), rgba(123, 84, 27, .8)); }
-
-.feature-card--purple .glow,
-.feature-card--blue .glow,
-.feature-card--rose .glow,
-.feature-card--lilac .glow { 
-    position:absolute;
-    inset: 18px 26px 18px 26px;
-    border-radius: 16px;
-    background: rgba(255,255,255,.08);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
-}
-
-.feature-card--blue .beam {
-    position:absolute;
-    inset: 30px 28px 0; 
-    background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0));
-    clip-path: polygon(20% 100%, 39% 0, 58% 100%, 76% 0, 100% 100%);
-}
-
-.feature-card--rose .beam {
-    position:absolute;
-    inset: 24px 20px 12px;
-    background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0));
-    clip-path: polygon(50% 0, 78% 100%, 100% 100%, 65% 42%, 0 100%, 22% 100%);
-}
-
-.feature-card--lilac .spark {
-    position:absolute;
-    width: 84px;
-    height: 84px;
-    left: 50%;
-    top: 48%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,255,255,.85), rgba(255,255,255,0) 62%);
-    box-shadow: 0 0 20px rgba(255,255,255,.3);
-}
-
-.feature-card--lilac .spark::before,
-.feature-card--lilac .spark::after {
-    content:"";
-    position:absolute;
-    inset: 50% auto auto 50%;
-    width: 82px;
-    height: 82px;
-    transform: translate(-50%, -50%);
-    background: conic-gradient(from 0deg, rgba(255,255,255,.0) 0 10%, rgba(255,255,255,.9) 10% 12%, rgba(255,255,255,.0) 12% 22%, rgba(255,255,255,.9) 22% 24%, rgba(255,255,255,.0) 24% 34%, rgba(255,255,255,.9) 34% 36%, rgba(255,255,255,.0) 36% 46%, rgba(255,255,255,.9) 46% 48%, rgba(255,255,255,.0) 48% 58%, rgba(255,255,255,.9) 58% 60%, rgba(255,255,255,.0) 60% 70%, rgba(255,255,255,.9) 70% 72%, rgba(255,255,255,.0) 72% 82%, rgba(255,255,255,.9) 82% 84%, rgba(255,255,255,.0) 84% 94%, rgba(255,255,255,.9) 94% 96%, rgba(255,255,255,.0) 96% 100%);
-    border-radius: 50%;
-}
-
-.feature-card--lilac .spark::after {
-    width: 28px;
-    height: 28px;
-    background: rgba(255,255,255,.85);
-    box-shadow: 0 0 18px rgba(255,255,255,.6);
-}
-
-@media(max-width:900px){
-
-    .container{
-        grid-template-columns:1fr;
-    }
-
-    .countdown{
-        font-size:2.5rem;
-    }
-
-    .next-hour{
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .feature-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .feature-banner {
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .feature-char-title {
-        width:100%;
-    }
-}
-
-@media(max-width:560px){
-    .feature-grid {
-        grid-template-columns:1fr;
-    }
-
-    .feature-name {
-        font-size: 2.3rem;
-    }
-}
+:root{--background:#030806;--background-2:#07130c;--card:rgba(10,30,18,.72);--green:#39ff88;--white:#f2fff6;--muted:#91a69a;--border:rgba(57,255,136,.15);--border-hover:rgba(57,255,136,.5);--yellow:#f4d35e}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif}
+body{min-height:100vh;background:radial-gradient(circle at 15% 10%,rgba(57,255,136,.09),transparent 30%),radial-gradient(circle at 85% 50%,rgba(19,184,92,.08),transparent 30%),linear-gradient(180deg,var(--background),var(--background-2),var(--background));color:var(--white)}
+.container{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:20px;max-width:1600px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--border);backdrop-filter:blur(15px);border-radius:18px;padding:20px;transition:.3s}
+.card:hover{border-color:var(--border-hover);box-shadow:0 20px 50px rgba(0,0,0,.25),0 0 30px rgba(57,255,136,.04)}
+.next-hour{display:flex;gap:20px;align-items:center}
+.logo{width:120px;height:120px;border-radius:16px;object-fit:cover}
+.badge{display:inline-block;background:#4b4313;color:var(--yellow);padding:6px 12px;border-radius:8px;font-weight:700;margin-bottom:10px}
+.countdown{font-size:clamp(2rem,4vw,4rem);font-weight:900;margin:10px 0;text-shadow:0 0 20px rgba(57,255,136,.2)}
+.subtitle,.section-desc{color:var(--muted)}
+.section-title{font-size:1.8rem;margin-bottom:5px}
+.section-desc{margin-bottom:20px}
+.event-list{max-height:450px;overflow-y:auto}
+.event-list::-webkit-scrollbar{width:8px}.event-list::-webkit-scrollbar-thumb{background:rgba(57,255,136,.2);border-radius:20px}.event-list::-webkit-scrollbar-thumb:hover{background:rgba(57,255,136,.4)}
+.event{padding:18px 0;border-top:1px solid var(--border)}
+.event-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}
+.status{background:#2a2d34;padding:5px 10px;border-radius:8px;font-weight:700;color:#bfc5d1}
+.multiplier{color:var(--green);font-weight:800}
+.odds-heading{margin-bottom:5px}.live{color:var(--green);text-shadow:0 0 10px var(--green)}
+.odds-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px 0;border-top:1px solid var(--border)}
+.odds-item{display:flex;align-items:center;gap:14px;min-width:0}.odds-item img{width:52px;height:52px;border-radius:10px;object-fit:cover}.odds-item strong{overflow-wrap:anywhere}.odds{font-weight:800;white-space:nowrap}
+.feature-showcase{margin-top:20px;background:rgba(10,15,13,.85);border:1px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02)}
+.feature-quote{padding:18px 20px;font-size:1.05rem;line-height:1.5;color:rgba(242,255,246,.85);border-bottom:1px solid rgba(255,255,255,.04)}
+.feature-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:150px;padding:24px;background:linear-gradient(180deg,rgba(255,255,255,.03),transparent)}
+.feature-char-title{flex:1;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.feature-week{color:#d9c5ff;font-weight:900;letter-spacing:.25em;font-size:.8rem;text-transform:uppercase;margin-bottom:10px}
+.feature-name{font-size:clamp(2rem,4vw,4rem);line-height:.95;letter-spacing:-.05em;font-weight:900;color:#f2f6f5;text-transform:uppercase}
+.feature-name .highlight{color:#f7d778;text-shadow:0 0 18px rgba(247,215,120,.28)}
+.feature-ended{margin-top:10px;color:rgba(255,255,255,.55);font-size:.7rem;font-weight:800;letter-spacing:.25em;text-transform:uppercase}
+.feature-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:10px 14px 18px}
+/* Add your artwork to the images folder and update each src below to its filename. */
+.feature-card{height:220px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);overflow:hidden}
+.feature-card img{display:block;width:100%;height:100%;object-fit:cover}
+@media(max-width:900px){.container{grid-template-columns:1fr}.next-hour{flex-direction:column;text-align:center}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.container{padding:12px}.feature-grid{grid-template-columns:1fr}.feature-banner{padding:20px}.feature-char-title{width:100%}.feature-name{font-size:2.3rem}.odds-row{align-items:flex-start;flex-direction:column}.odds-item{width:100%}.odds{margin-left:66px}}
 </style>
 </head>
 <body>
-
 <div class="container">
+  <main>
+    <section class="card next-hour" aria-label="Next sprite event">
+      <img src="images/token.png" class="logo" alt="Xpluzo">
+      <div>
+        <div class="badge">✨ NEXT SPRITE EVENT</div>
+        <div class="subtitle">Starts In</div>
+        <div class="countdown" id="countdown">00:00:00:00</div>
+        <div class="subtitle">Xpluzo's Hub Event Schedule</div>
+      </div>
+    </section>
 
-    <div>
-
-        <div class="card next-hour">
-
-    <img
-        src="images/token.png"
-        class="logo"
-        alt="Xpluzo">
-
-    <div>
-
-        <div class="badge">
-            ✨ NEXT SPRITE EVENT
+    <section class="card" style="margin-top:20px" aria-labelledby="event-hours-title">
+      <h2 class="section-title" id="event-hours-title">EVENT HOURS</h2>
+      <p class="section-desc">Upcoming scheduled events</p>
+      <div class="event-list">
+        <div class="event">
+          <div class="event-header"><strong>Nov 14 • 2 PM</strong><span class="status">NEXT</span></div>
+          Gold Boost <span class="multiplier">7.5x</span> • Shop Access <span class="multiplier">1.5x</span>
         </div>
-
-        <div class="subtitle">
-            Starts In
+        <div class="event">
+          <div class="event-header"><strong>Nov 14 • 9 PM</strong><span class="status">UPCOMING</span></div>
+          Gold Boost <span class="multiplier">7.5x</span>
         </div>
-
-        <div class="countdown" id="countdown">
-            00:00:00:00
+        <div class="event">
+          <div class="event-header"><strong>Nov 21 • 2 PM</strong><span class="status">UPCOMING</span></div>
+          Gold Boost <span class="multiplier">7.5x</span>
         </div>
+      </div>
+    </section>
 
-        <div class="subtitle">
-            Xpluzo's Hub Event Schedule
+    <section class="feature-showcase" aria-label="ASAP feature">
+      <div class="feature-quote">"Treasure drop rates from chests are constant since season launch and don't vary throughout the day, except during Treasures. Other than Gizmos, you can't get the same treasure twice." — Epic Games</div>
+      <div class="feature-banner">
+        <div class="feature-char-title">
+          <div>
+            <div class="feature-week">Week 1 • Nov 1 – 8</div>
+            <div class="feature-name"><span class="highlight">A</span>SAP ARRIVES</div>
+          </div>
+          <div class="feature-ended">Ended</div>
         </div>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card"><img src="images/treasure-1.png" alt="ASAP feature image 1"></div>
+        <div class="feature-card"><img src="images/treasure-2.png" alt="ASAP feature image 2"></div>
+        <div class="feature-card"><img src="images/treasure-3.png" alt="ASAP feature image 3"></div>
+        <div class="feature-card"><img src="images/treasure-4.png" alt="ASAP feature image 4"></div>
+        <div class="feature-card"><img src="images/treasure-5.png" alt="ASAP feature image 5"></div>
+        <div class="feature-card"><img src="images/treasure-6.png" alt="ASAP feature image 6"></div>
+        <div class="feature-card"><img src="images/treasure-7.png" alt="ASAP feature image 7"></div>
+        <div class="feature-card"><img src="images/treasure-8.png" alt="ASAP feature image 8"></div>
+        <div class="feature-card"><img src="images/treasure-9.png" alt="ASAP feature image 9"></div>
+        <div class="feature-card"><img src="images/treasure-10.png" alt="ASAP feature image 10"></div>
+      </div>
+    </section>
+  </main>
 
-    </div>
-
+  <section class="card" aria-labelledby="sprite-odds-title">
+    <h2 class="odds-heading" id="sprite-odds-title"><span class="live">●</span> LIVE SPRITE ODDS</h2>
+    <p class="section-desc">Current rates and chances</p>
+    <div class="odds-row"><div class="odds-item"><img src="images/w2-outfit.png" alt=""><strong>Skin For The Week</strong></div><span class="odds">1 in 1,562,500</span></div>
+    <div class="odds-row"><div class="odds-item"><img src="images/token.png" alt=""><strong>Pirate Access Pass</strong></div><span class="odds">1 in 137,500</span></div>
+    <div class="odds-row"><div class="odds-item"><img src="images/w2-car.png" alt=""><strong>Vehicle Skin For The Week</strong></div><span class="odds">1 in 7,813</span></div>
+    <div class="odds-row"><div class="odds-item"><img src="images/w2-backbling.png" alt=""><strong>Pickaxe/Backbling For The Week</strong></div><span class="odds">1 in 568</span></div>
+    <div class="odds-row"><div class="odds-item"><img src="images/w2-jam.png" alt=""><strong>Jam Track For The Week</strong></div><span class="odds">1 in 391</span></div>
+    <div class="odds-row"><div class="odds-item"><img src="images/w2-loading.png" alt=""><strong>Loading Screen For The Week</strong></div><span class="odds">1 in 272</span></div>
+    <div class="odds-row"><div class="odds-item"><img src="images/gizmo-smuggler-key.png" alt=""><strong>Any Gizmo</strong></div><span class="odds">1 in 127</span></div>
+  </section>
 </div>
-
-        <div class="feature-showcase">
-            <div class="feature-quote">
-                "Treasure drop rates from chests are constant since season launch and don't vary throughout the day, except during Treasures. Other than Gizmos, you can't get the same treasure twice." — Epic Games
-            </div>
-
-            <div class="feature-banner">
-                <div class="feature-character" aria-hidden="true">
-                    <div class="helmet"></div>
-                    <div class="head"></div>
-                    <div class="arm left"></div>
-                    <div class="arm right"></div>
-                    <div class="torso"></div>
-                    <div class="leg left"></div>
-                    <div class="leg right"></div>
-                </div>
-
-                <div class="feature-char-title">
-                    <div>
-                        <div class="feature-week">Week 1 • Nov 1 – 8</div>
-                        <div class="feature-name"><span class="highlight">A</span>SAP ARRIVES</div>
-                    </div>
-                    <div class="feature-ended">Ended</div>
-                </div>
-            </div>
-
-            <div class="feature-grid">
-                <div class="feature-card feature-card--gold">
-                    <div class="rays"></div>
-                    <div class="medal"></div>
-                    <div class="letter">F</div>
-                </div>
-
-                <div class="feature-card feature-card--purple">
-                    <div class="glow"></div>
-                    <div class="weapon"></div>
-                </div>
-
-                <div class="feature-card feature-card--blue">
-                    <div class="glow"></div>
-                    <div class="beam"></div>
-                    <div class="weapon"></div>
-                </div>
-
-                <div class="feature-card feature-card--rose">
-                    <div class="glow"></div>
-                    <div class="beam"></div>
-                    <div class="weapon"></div>
-                </div>
-
-                <div class="feature-card feature-card--lilac">
-                    <div class="glow"></div>
-                    <div class="spark"></div>
-                    <div class="weapon"></div>
-                </div>
-
-                <div class="feature-card feature-card--gold">
-                    <div class="rays"></div>
-                    <div class="medal"></div>
-                    <div class="letter">F</div>
-                </div>
-
-                <div class="feature-card feature-card--purple">
-                    <div class="glow"></div>
-                    <div class="weapon"></div>
-                </div>
-
-                <div class="feature-card feature-card--blue">
-                    <div class="glow"></div>
-                    <div class="beam"></div>
-                    <div class="weapon"></div>
-                </div>
-
-                <div class="feature-card feature-card--rose">
-                    <div class="glow"></div>
-                    <div class="beam"></div>
-                    <div class="weapon"></div>
-                </div>
-
-                <div class="feature-card feature-card--lilac">
-                    <div class="glow"></div>
-                    <div class="spark"></div>
-                    <div class="weapon"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card" style="margin-top:20px;">
-
-            <h2 class="section-title">
-                EVENT HOURS
-            </h2>
-
-            <p class="section-desc">
-                Upcoming scheduled events
-            </p>
-
-            <div class="event-list">
-
-                <div class="event">
-                    <div class="event-header">
-                        <strong>Nov 14 • 2 PM</strong>
-                        <span class="status">NEXT</span>
-                    </div>
-
-                    Gold Boost
-                    <span class="multiplier">7.5x</span>
-
-                    • Shop Access
-                    <span class="multiplier">1.5x</span>
-                </div>
-
-                <div class="event">
-                    <div class="event-header">
-                        <strong>Nov 14 • 9 PM</strong>
-                        <span class="status">UPCOMING</span>
-                    </div>
-
-                    Gold Boost
-                    <span class="multiplier">7.5x</span>
-                </div>
-
-                <div class="event">
-                    <div class="event-header">
-                        <strong>Nov 21 • 2 PM</strong>
-                        <span class="status">UPCOMING</span>
-                    </div>
-
-                    Gold Boost
-                    <span class="multiplier">7.5x</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="card">
-
-       <h2>
-    <span class="live">●</span>
-    LIVE SPRITE ODDS
-</h2>
-
-<p class="section-desc">
-    Current rates and chances
-</p>
-
-        <div class="odds-row">
-            <div class="odds-item">
-                <img src="images/w2-outfit.png">
-                <strong>Skin For The Week</strong>
-            </div>
-
-            <span class="odds">
-                1 in 1,562,500
-            </span>
-        </div>
-
-        <div class="odds-row">
-            <div class="odds-item">
-                <img src="images/token.png">
-                <strong>Pirate Access Pass</strong>
-            </div>
-
-            <span class="odds">
-                1 in 137,500
-            </span>
-        </div>
-
-        <div class="odds-row">
-            <div class="odds-item">
-                <img src="images/w2-car.png">
-                <strong>Vehicle Skin For The Week</strong>
-            </div>
-
-            <span class="odds">
-                1 in 7,813
-            </span>
-        </div>
-                <div class="odds-row">
-            <div class="odds-item">
-                <img src="images/w2-backbling.png">
-                <strong>Pickaxe/Backbling For The Week</strong>
-            </div>
-
-            <span class="odds">
-                1 in 568
-            </span>
-        </div>
-                <div class="odds-row">
-            <div class="odds-item">
-                <img src="images/w2-jam.png">
-                <strong>Jam Track For The Week</strong>
-            </div>
-
-            <span class="odds">
-                1 in 391
-            </span>
-        </div>
-                <div class="odds-row">
-            <div class="odds-item">
-                <img src="images/w2-loading.png">
-                <strong>Loading Screen For The Week</strong>
-            </div>
-
-            <span class="odds">
-                1 in 272
-            </span>
-        </div>
-                <div class="odds-row">
-            <div class="odds-item">
-                <img src="images/gizmo-smuggler-key.png">
-                <strong>Any Gizmo</strong>
-            </div>
-
-            <span class="odds">
-                1 in 127
-            </span>
-        </div>
-
-    </div>
-
-</div>
-
 <script>
-
 const targetDate = new Date("2026-11-14T14:00:00");
-
 function updateCountdown(){
-
-    const now = new Date();
-    const diff = targetDate - now;
-
-    if(diff <= 0){
-        document.getElementById("countdown").textContent =
-        "LIVE";
-        return;
-    }
-
-    const days = Math.floor(diff / 86400000);
-    const hours = Math.floor(diff % 86400000 / 3600000);
-    const mins = Math.floor(diff % 3600000 / 60000);
-    const secs = Math.floor(diff % 60000 / 1000);
-
-    document.getElementById("countdown").textContent =
-        `${days}:${String(hours).padStart(2,"0")}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+  const diff = targetDate - new Date();
+  if(diff <= 0){document.getElementById("countdown").textContent = "LIVE";return;}
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor(diff % 86400000 / 3600000);
+  const mins = Math.floor(diff % 3600000 / 60000);
+  const secs = Math.floor(diff % 60000 / 1000);
+  document.getElementById("countdown").textContent = `${days}:${String(hours).padStart(2,"0")}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
 }
-
 updateCountdown();
 setInterval(updateCountdown,1000);
-
 </script>
-
 </body>
 </html>
