@@ -25,6 +25,9 @@
     --border-hover:rgba(57,255,136,.5);
 
     --glow:rgba(57,255,136,.25);
+    --yellow:#f4d35e;
+    --purple:#b98ce8;
+    --purple-dark:#6b3a8a;
 }
 
 *{
@@ -253,6 +256,346 @@ body{
     color:var(--green);
 }
 
+.feature-showcase {
+    margin: 22px 0 22px;
+    background: rgba(10, 15, 13, 0.85);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+}
+
+.feature-quote {
+    padding: 18px 20px 8px;
+    font-size: 1.05rem;
+    line-height:1.5;
+    color: rgba(242,255,246,.85);
+    font-weight:400;
+    letter-spacing: .01em;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.feature-quote strong {
+    font-weight: 700;
+}
+
+.feature-banner {
+    position: relative;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height: 150px;
+    padding: 24px 24px 0;
+    background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+}
+
+.feature-character {
+    position: relative;
+    width: 120px;
+    height: 170px;
+    margin-right: 16px;
+    filter: drop-shadow(0 0 25px rgba(255,255,255,.03));
+}
+
+.feature-character .head {
+    position:absolute;
+    width: 34px;
+    height: 34px;
+    left: 46px;
+    top: 12px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #ded9d2, #8e857d);
+    box-shadow: inset -6px -4px 0 rgba(0,0,0,.12);
+}
+
+.feature-character .helmet {
+    position:absolute;
+    left: 34px;
+    top: 4px;
+    width: 58px;
+    height: 44px;
+    border-radius: 18px 18px 12px 12px;
+    background: linear-gradient(180deg, #f1f2f4, #8e9aa2);
+    border: 2px solid rgba(0,0,0,.18);
+}
+
+.feature-character .torso {
+    position:absolute;
+    left: 28px;
+    top: 42px;
+    width: 64px;
+    height: 74px;
+    background: linear-gradient(180deg, #1d1f24, #3d4250 30%, #1d1f24);
+    border-radius: 16px 16px 12px 12px;
+    border: 2px solid rgba(255,255,255,.06);
+}
+
+.feature-character .arm {
+    position:absolute;
+    width: 18px;
+    height: 72px;
+    top: 46px;
+    background: linear-gradient(180deg, #d9ddd6, #8a8f8a);
+    border-radius: 14px;
+}
+
+.feature-character .arm.left { left: 10px; transform: rotate(24deg); }
+.feature-character .arm.right { left: 92px; transform: rotate(-24deg); }
+
+.feature-character .leg {
+    position:absolute;
+    width: 18px;
+    height: 58px;
+    top: 110px;
+    background: linear-gradient(180deg, #0d1217, #2a2f36);
+    border-radius: 10px;
+}
+
+.feature-character .leg.left { left: 42px; }
+.feature-character .leg.right { left: 60px; }
+
+.feature-char-title {
+    flex:1;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    margin-top: 8px;
+}
+
+.feature-week {
+    color: #d9c5ff;
+    font-weight: 900;
+    letter-spacing: 0.38em;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-bottom: 10px;
+}
+
+.feature-name {
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: .9;
+    letter-spacing: -0.05em;
+    font-weight: 900;
+    color: #f2f6f5;
+    text-shadow: 0 0 22px rgba(168,140,255,.15);
+    text-transform: uppercase;
+}
+
+.feature-name .highlight {
+    color: #f7d778;
+    text-shadow: 0 0 18px rgba(247,215,120,.28);
+}
+
+.feature-ended {
+    align-self:flex-start;
+    margin-top: 10px;
+    color: rgba(255,255,255,.55);
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+}
+
+.feature-grid {
+    display:grid;
+    grid-template-columns: 1.15fr 1fr 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 10px 14px 18px;
+}
+
+.feature-card {
+    position:relative;
+    height: 220px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.01));
+    border: 1px solid rgba(255,255,255,.06);
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+}
+
+.feature-card--gold {
+    background: linear-gradient(180deg, #f5d862 0%, #e6c04e 50%, #dfb53d 100%);
+}
+
+.feature-card--purple {
+    background: linear-gradient(180deg, #d8a3ff 0%, #c288ef 52%, #a56ad7 100%);
+}
+
+.feature-card--blue {
+    background: linear-gradient(180deg, #75d7ff 0%, #6db2e8 54%, #5d9bd0 100%);
+}
+
+.feature-card--rose {
+    background: linear-gradient(180deg, #b189d9 0%, #8f5ec8 100%);
+}
+
+.feature-card--lilac {
+    background: linear-gradient(180deg, #d7b0ff 0%, #c7a7fb 38%, #987de1 100%);
+}
+
+.feature-card::before,
+.feature-card::after {
+    content:"";
+    position:absolute;
+    inset:auto;
+}
+
+.feature-card--gold .medal {
+    position:absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff9d8 0%, #efd57b 18%, #d7af42 40%, #6b4d22 100%);
+    box-shadow: inset 0 0 0 12px rgba(100,68,27,.7), inset 0 0 0 22px rgba(56,37,14,.45), 0 12px 18px rgba(0,0,0,.18);
+}
+
+.feature-card--gold .medal::before,
+.feature-card--gold .medal::after {
+    content:"";
+    position:absolute;
+    inset:12px;
+    border: 12px solid rgba(89,61,13,.63);
+    border-radius:50%;
+}
+
+.feature-card--gold .medal::after {
+    inset: 36px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.08);
+    box-shadow: 0 0 0 10px rgba(93,62,18,.32);
+}
+
+.feature-card--gold .letter {
+    position:absolute;
+    left: 50%;
+    top: 49%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(88,65,25,.78);
+}
+
+.feature-card--gold .rays {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    width: 160px;
+    height: 160px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: conic-gradient(from 135deg, rgba(110,78,18,0.0) 0 8%, rgba(110,78,18,.85) 8% 10%, rgba(110,78,18,0.0) 10% 18%, rgba(110,78,18,.85) 18% 20%, rgba(110,78,18,0.0) 20% 28%, rgba(110,78,18,.85) 28% 30%, rgba(110,78,18,0.0) 30% 38%, rgba(110,78,18,.85) 38% 40%, rgba(110,78,18,0.0) 40% 48%, rgba(110,78,18,.85) 48% 50%, rgba(110,78,18,0.0) 50% 58%, rgba(110,78,18,.85) 58% 60%, rgba(110,78,18,0.0) 60% 68%, rgba(110,78,18,.85) 68% 70%, rgba(110,78,18,0.0) 70% 78%, rgba(110,78,18,.85) 78% 80%, rgba(110,78,18,0.0) 80% 88%, rgba(110,78,18,.85) 88% 90%, rgba(110,78,18,0.0) 90% 100%);
+    opacity: .92;
+}
+
+.feature-card--purple .weapon,
+.feature-card--blue .weapon,
+.feature-card--rose .weapon,
+.feature-card--lilac .weapon {
+    position:absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 82px;
+    background: linear-gradient(180deg, rgba(255,255,255,.32), rgba(0,0,0,.1));
+    border-radius: 20px;
+    box-shadow: inset 0 0 0 8px rgba(255,255,255,.15);
+}
+
+.feature-card--purple .weapon::before,
+.feature-card--blue .weapon::before,
+.feature-card--rose .weapon::before,
+.feature-card--lilac .weapon::before {
+    content:"";
+    position:absolute;
+    width: 62px;
+    height: 46px;
+    border-radius: 12px;
+    left: 32px;
+    top: 18px;
+    background: linear-gradient(180deg, rgba(214,186,89,.9), rgba(153,107,28,.8));
+    box-shadow: inset 0 0 0 6px rgba(255,255,255,.1);
+}
+
+.feature-card--purple .weapon::after,
+.feature-card--blue .weapon::after,
+.feature-card--rose .weapon::after,
+.feature-card--lilac .weapon::after {
+    content:"";
+    position:absolute;
+    left: 66px;
+    top: 6px;
+    width: 18px;
+    height: 70px;
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(255,255,255,.4), rgba(255,255,255,.1));
+}
+
+.feature-card--blue .weapon::before { background: linear-gradient(180deg, rgba(57,255,148,.8), rgba(19,99,92,.8)); }
+.feature-card--rose .weapon::before { background: linear-gradient(180deg, rgba(241, 118, 118, .9), rgba(133, 35, 52, .8)); }
+.feature-card--lilac .weapon::before { background: linear-gradient(180deg, rgba(255, 203, 119, .9), rgba(123, 84, 27, .8)); }
+
+.feature-card--purple .glow,
+.feature-card--blue .glow,
+.feature-card--rose .glow,
+.feature-card--lilac .glow { 
+    position:absolute;
+    inset: 18px 26px 18px 26px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.08);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+}
+
+.feature-card--blue .beam {
+    position:absolute;
+    inset: 30px 28px 0; 
+    background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0));
+    clip-path: polygon(20% 100%, 39% 0, 58% 100%, 76% 0, 100% 100%);
+}
+
+.feature-card--rose .beam {
+    position:absolute;
+    inset: 24px 20px 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0));
+    clip-path: polygon(50% 0, 78% 100%, 100% 100%, 65% 42%, 0 100%, 22% 100%);
+}
+
+.feature-card--lilac .spark {
+    position:absolute;
+    width: 84px;
+    height: 84px;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.85), rgba(255,255,255,0) 62%);
+    box-shadow: 0 0 20px rgba(255,255,255,.3);
+}
+
+.feature-card--lilac .spark::before,
+.feature-card--lilac .spark::after {
+    content:"";
+    position:absolute;
+    inset: 50% auto auto 50%;
+    width: 82px;
+    height: 82px;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(from 0deg, rgba(255,255,255,.0) 0 10%, rgba(255,255,255,.9) 10% 12%, rgba(255,255,255,.0) 12% 22%, rgba(255,255,255,.9) 22% 24%, rgba(255,255,255,.0) 24% 34%, rgba(255,255,255,.9) 34% 36%, rgba(255,255,255,.0) 36% 46%, rgba(255,255,255,.9) 46% 48%, rgba(255,255,255,.0) 48% 58%, rgba(255,255,255,.9) 58% 60%, rgba(255,255,255,.0) 60% 70%, rgba(255,255,255,.9) 70% 72%, rgba(255,255,255,.0) 72% 82%, rgba(255,255,255,.9) 82% 84%, rgba(255,255,255,.0) 84% 94%, rgba(255,255,255,.9) 94% 96%, rgba(255,255,255,.0) 96% 100%);
+    border-radius: 50%;
+}
+
+.feature-card--lilac .spark::after {
+    width: 28px;
+    height: 28px;
+    background: rgba(255,255,255,.85);
+    box-shadow: 0 0 18px rgba(255,255,255,.6);
+}
+
 @media(max-width:900px){
 
     .container{
@@ -268,6 +611,28 @@ body{
         text-align:center;
     }
 
+    .feature-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .feature-banner {
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .feature-char-title {
+        width:100%;
+    }
+}
+
+@media(max-width:560px){
+    .feature-grid {
+        grid-template-columns:1fr;
+    }
+
+    .feature-name {
+        font-size: 2.3rem;
+    }
 }
 </style>
 </head>
@@ -305,6 +670,92 @@ body{
     </div>
 
 </div>
+
+        <div class="feature-showcase">
+            <div class="feature-quote">
+                "Treasure drop rates from chests are constant since season launch and don't vary throughout the day, except during Treasures. Other than Gizmos, you can't get the same treasure twice." — Epic Games
+            </div>
+
+            <div class="feature-banner">
+                <div class="feature-character" aria-hidden="true">
+                    <div class="helmet"></div>
+                    <div class="head"></div>
+                    <div class="arm left"></div>
+                    <div class="arm right"></div>
+                    <div class="torso"></div>
+                    <div class="leg left"></div>
+                    <div class="leg right"></div>
+                </div>
+
+                <div class="feature-char-title">
+                    <div>
+                        <div class="feature-week">Week 1 • Nov 1 – 8</div>
+                        <div class="feature-name"><span class="highlight">A</span>SAP ARRIVES</div>
+                    </div>
+                    <div class="feature-ended">Ended</div>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card feature-card--gold">
+                    <div class="rays"></div>
+                    <div class="medal"></div>
+                    <div class="letter">F</div>
+                </div>
+
+                <div class="feature-card feature-card--purple">
+                    <div class="glow"></div>
+                    <div class="weapon"></div>
+                </div>
+
+                <div class="feature-card feature-card--blue">
+                    <div class="glow"></div>
+                    <div class="beam"></div>
+                    <div class="weapon"></div>
+                </div>
+
+                <div class="feature-card feature-card--rose">
+                    <div class="glow"></div>
+                    <div class="beam"></div>
+                    <div class="weapon"></div>
+                </div>
+
+                <div class="feature-card feature-card--lilac">
+                    <div class="glow"></div>
+                    <div class="spark"></div>
+                    <div class="weapon"></div>
+                </div>
+
+                <div class="feature-card feature-card--gold">
+                    <div class="rays"></div>
+                    <div class="medal"></div>
+                    <div class="letter">F</div>
+                </div>
+
+                <div class="feature-card feature-card--purple">
+                    <div class="glow"></div>
+                    <div class="weapon"></div>
+                </div>
+
+                <div class="feature-card feature-card--blue">
+                    <div class="glow"></div>
+                    <div class="beam"></div>
+                    <div class="weapon"></div>
+                </div>
+
+                <div class="feature-card feature-card--rose">
+                    <div class="glow"></div>
+                    <div class="beam"></div>
+                    <div class="weapon"></div>
+                </div>
+
+                <div class="feature-card feature-card--lilac">
+                    <div class="glow"></div>
+                    <div class="spark"></div>
+                    <div class="weapon"></div>
+                </div>
+            </div>
+        </div>
 
         <div class="card" style="margin-top:20px;">
 
