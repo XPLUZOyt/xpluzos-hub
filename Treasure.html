@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Tracker</title>
+
+<style>
+:root{
+    --background:#030806;
+    --background-2:#07130c;
+
+    --card:rgba(10,30,18,.72);
+    --card-hover:rgba(13,42,24,.85);
+
+    --green:#39ff88;
+    --green-light:#8affb9;
+    --green-dark:#13b85c;
+
+    --white:#f2fff6;
+    --text:#d8e9dd;
+    --muted:#91a69a;
+
+    --border:rgba(57,255,136,.15);
+    --border-hover:rgba(57,255,136,.5);
+
+    --glow:rgba(57,255,136,.25);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:
+        radial-gradient(circle at 15% 10%,
+            rgba(57,255,136,.09),
+            transparent 30%),
+        radial-gradient(circle at 85% 50%,
+            rgba(19,184,92,.08),
+            transparent 30%),
+        linear-gradient(
+            180deg,
+            var(--background),
+            var(--background-2),
+            var(--background)
+        );
+    color:var(--white);
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    transition:.3s;
+}
+
+.card:hover{
+    border-color:var(--border-hover);
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.25),
+        0 0 30px rgba(57,255,136,.04);
+}
+
+.badge{
+    background:rgba(57,255,136,.08);
+    color:var(--green);
+    border:1px solid var(--border);
+    border-radius:50px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.countdown{
+    color:var(--white);
+    text-shadow:
+        0 0 20px rgba(57,255,136,.2);
+}
+
+.subtitle{
+    color:var(--muted);
+}
+
+.section-title{
+    color:var(--white);
+}
+
+.section-desc{
+    color:var(--muted);
+}
+
+.event{
+    border-top:1px solid var(--border);
+}
+
+.status{
+    background:rgba(57,255,136,.08);
+    color:var(--green);
+    border:1px solid var(--border);
+}
+
+.multiplier{
+    color:var(--green);
+    font-weight:800;
+}
+
+.live{
+    color:var(--green);
+    text-shadow:0 0 10px var(--green);
+}
+
+.odds-row{
+    border-top:1px solid var(--border);
+}
+
+.odds{
+    color:var(--white);
+    font-weight:800;
+}
+
+.event-list::-webkit-scrollbar{
+    width:8px;
+}
+
+.event-list::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.event-list::-webkit-scrollbar-thumb{
+    background:rgba(57,255,136,.2);
+    border-radius:20px;
+}
+
+.event-list::-webkit-scrollbar-thumb:hover{
+    background:rgba(57,255,136,.4);
+}
+
+.container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
+}
+
+.next-hour{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.logo{
+    width:120px;
+    height:120px;
+    border-radius:16px;
+    object-fit:cover;
+}
+
+.badge{
+    background:#4b4313;
+    color:var(--yellow);
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:8px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.countdown{
+    font-size:4rem;
+    font-weight:900;
+    margin:10px 0;
+}
+
+.subtitle{
+    color:var(--muted);
+}
+
+.section-title{
+    font-size:1.8rem;
+    margin-bottom:5px;
+}
+
+.section-desc{
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+.event-list{
+    max-height:450px;
+    overflow-y:auto;
+}
+
+.event{
+    padding:18px 0;
+    border-top:1px solid var(--border);
+}
+
+.event-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+}
+
+.status{
+    background:#2a2d34;
+    padding:5px 10px;
+    border-radius:8px;
+    font-weight:700;
+    color:#bfc5d1;
+}
+
+.multiplier{
+    color:var(--green);
+    font-weight:700;
+}
+
+.odds-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+    border-top:1px solid var(--border);
+}
+
+.odds-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.odds-item img{
+    width:52px;
+    height:52px;
+    border-radius:10px;
+}
+
+.odds{
+    font-weight:800;
+}
+
+.live{
+    color:var(--green);
+}
+
+@media(max-width:900px){
+
+    .container{
+        grid-template-columns:1fr;
+    }
+
+    .countdown{
+        font-size:2.5rem;
+    }
+
+    .next-hour{
+        flex-direction:column;
+        text-align:center;
+    }
+
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div>
+
+        <div class="card next-hour">
+
+    <img
+        src="your-logo.png"
+        class="logo"
+        alt="Xpluzo">
+
+    <div>
+
+        <div class="badge">
+            ✨ NEXT SPRITE EVENT
+        </div>
+
+        <div class="subtitle">
+            Starts In
+        </div>
+
+        <div class="countdown" id="countdown">
+            00:00:00:00
+        </div>
+
+        <div class="subtitle">
+            Xpluzo's Hub Event Schedule
+        </div>
+
+    </div>
+
+</div>
+
+        <div class="card" style="margin-top:20px;">
+
+            <h2 class="section-title">
+                EVENT HOURS
+            </h2>
+
+            <p class="section-desc">
+                Upcoming scheduled events
+            </p>
+
+            <div class="event-list">
+
+                <div class="event">
+                    <div class="event-header">
+                        <strong>Nov 14 • 2 PM</strong>
+                        <span class="status">NEXT</span>
+                    </div>
+
+                    Gold Boost
+                    <span class="multiplier">7.5x</span>
+
+                    • Shop Access
+                    <span class="multiplier">1.5x</span>
+                </div>
+
+                <div class="event">
+                    <div class="event-header">
+                        <strong>Nov 14 • 9 PM</strong>
+                        <span class="status">UPCOMING</span>
+                    </div>
+
+                    Gold Boost
+                    <span class="multiplier">7.5x</span>
+                </div>
+
+                <div class="event">
+                    <div class="event-header">
+                        <strong>Nov 21 • 2 PM</strong>
+                        <span class="status">UPCOMING</span>
+                    </div>
+
+                    Gold Boost
+                    <span class="multiplier">7.5x</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+       <h2>
+    <span class="live">●</span>
+    LIVE SPRITE ODDS
+</h2>
+
+<p class="section-desc">
+    Current rates and chances
+</p>
+
+        <div class="odds-row">
+            <div class="odds-item">
+                <img src="https://via.placeholder.com/52">
+                <strong>Legendary Item</strong>
+            </div>
+
+            <span class="odds">
+                1 in 1,562,500
+            </span>
+        </div>
+
+        <div class="odds-row">
+            <div class="odds-item">
+                <img src="https://via.placeholder.com/52">
+                <strong>Access Pass</strong>
+            </div>
+
+            <span class="odds">
+                1 in 137,500
+            </span>
+        </div>
+
+        <div class="odds-row">
+            <div class="odds-item">
+                <img src="https://via.placeholder.com/52">
+                <strong>Vehicle Skin</strong>
+            </div>
+
+            <span class="odds">
+                1 in 7,813
+            </span>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const targetDate = new Date("2026-11-14T14:00:00");
+
+function updateCountdown(){
+
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if(diff <= 0){
+        document.getElementById("countdown").textContent =
+        "LIVE";
+        return;
+    }
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor(diff % 86400000 / 3600000);
+    const mins = Math.floor(diff % 3600000 / 60000);
+    const secs = Math.floor(diff % 60000 / 1000);
+
+    document.getElementById("countdown").textContent =
+        `${days}:${String(hours).padStart(2,"0")}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+}
+
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+</script>
+
+</body>
+</html>
