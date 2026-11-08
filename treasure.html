@@ -17,7 +17,6 @@
       --yellow: #f7d778;
       --status-text: #dfe7e3;
       --danger-soft: rgba(255, 90, 90, 0.18);
-      --purple: #d9c5ff;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", sans-serif; }
@@ -36,6 +35,37 @@
       max-width: 1500px;
       margin: 0 auto;
       padding: 22px 18px 40px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .site-credit {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .home-button {
+      display: inline-block;
+      padding: 10px 16px;
+      border: 1px solid var(--border-hover);
+      border-radius: 10px;
+      background: rgba(57, 255, 136, 0.1);
+      color: var(--white);
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+
+    .home-button:hover,
+    .home-button:focus-visible {
+      background: rgba(57, 255, 136, 0.2);
+      border-color: var(--green);
     }
 
     .card {
@@ -84,18 +114,14 @@
     }
 
     .subtitle,
-    .section-desc {
-      color: var(--muted);
-    }
+    .section-desc { color: var(--muted); }
 
     .section-title {
       font-size: 1.8rem;
       margin-bottom: 5px;
     }
 
-    .section-desc {
-      margin-bottom: 20px;
-    }
+    .section-desc { margin-bottom: 20px; }
 
     .schedule-grid {
       display: grid;
@@ -123,11 +149,7 @@
     }
 
     .event:first-child { border-top: 0; padding-top: 0; }
-
-    .event-main {
-      flex: 1;
-      min-width: 0;
-    }
+    .event-main { flex: 1; min-width: 0; }
 
     .event-header {
       display: flex;
@@ -143,15 +165,8 @@
       letter-spacing: .02em;
     }
 
-    .event-offer {
-      font-size: 1.02rem;
-      letter-spacing: .01em;
-    }
-
-    .multiplier {
-      color: var(--green);
-      font-weight: 800;
-    }
+    .event-offer { font-size: 1.02rem; letter-spacing: .01em; }
+    .multiplier { color: var(--green); font-weight: 800; }
 
     .event-badges {
       display: flex;
@@ -193,10 +208,7 @@
       font-size: clamp(1.2rem, 2vw, 1.8rem);
     }
 
-    .live {
-      color: var(--green);
-      text-shadow: 0 0 10px var(--green);
-    }
+    .live { color: var(--green); text-shadow: 0 0 10px var(--green); }
 
     .odds-row {
       display: flex;
@@ -221,15 +233,8 @@
       object-fit: cover;
     }
 
-    .odds-item strong {
-      overflow-wrap: anywhere;
-      font-size: .98rem;
-    }
-
-    .odds {
-      font-weight: 800;
-      white-space: nowrap;
-    }
+    .odds-item strong { overflow-wrap: anywhere; font-size: .98rem; }
+    .odds { font-weight: 800; white-space: nowrap; }
 
     @media (max-width: 900px) {
       .schedule-grid { grid-template-columns: 1fr; }
@@ -238,6 +243,8 @@
 
     @media (max-width: 560px) {
       .container { padding: 12px; }
+      .top-bar { align-items: flex-start; }
+      .site-credit { max-width: 60%; }
       .odds-row { align-items: flex-start; }
       .event { flex-direction: column; align-items: flex-start; }
       .event-badges { justify-content: flex-start; min-width: 0; }
@@ -246,6 +253,11 @@
 </head>
 <body>
   <div class="container">
+    <header class="top-bar">
+      <p class="site-credit">Made by XPLUZOYT please subscribe</p>
+      <a class="home-button" href="index.html">Home</a>
+    </header>
+
     <main>
       <section class="card next-hour" aria-label="Next sprite event">
         <img src="images/token.png" class="logo" alt="Xpluzo">
@@ -264,98 +276,59 @@
           <div class="event-list">
             <div class="event">
               <div class="event-main">
-                <div class="event-header">
-                  <div class="event-date">Sat, Nov 14 • 2:00 - 4:00 PM EST</div>
-                </div>
+                <div class="event-header"><div class="event-date">Sat, Nov 14 • 2:00 - 4:00 PM EST</div></div>
                 <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
-              <div class="event-badges">
-                <span class="status is-next">Next Treasure Hour</span>
-              </div>
+              <div class="event-badges"><span class="status is-next">Next Treasure Hour</span></div>
             </div>
-
             <div class="event">
               <div class="event-main">
-                <div class="event-header">
-                  <div class="event-date">Sat, Nov 14 • 9:00 - 11:00 PM EST</div>
-                </div>
+                <div class="event-header"><div class="event-date">Sat, Nov 14 • 9:00 - 11:00 PM EST</div></div>
                 <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
-              <div class="event-badges">
-                <span class="status">Upcoming</span>
-              </div>
+              <div class="event-badges"><span class="status">Upcoming</span></div>
             </div>
-
             <div class="event">
               <div class="event-main">
-                <div class="event-header">
-                  <div class="event-date">Sat, Nov 21 • 2:00 - 4:00 PM EST</div>
-                </div>
+                <div class="event-header"><div class="event-date">Sat, Nov 21 • 2:00 - 4:00 PM EST</div></div>
                 <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
-              <div class="event-badges">
-                <span class="status">Upcoming</span>
-              </div>
+              <div class="event-badges"><span class="status">Upcoming</span></div>
             </div>
-
             <div class="event">
               <div class="event-main">
-                <div class="event-header">
-                  <div class="event-date">Sat, Nov 21 • 9:00 - 11:00 PM EST</div>
-                </div>
+                <div class="event-header"><div class="event-date">Sat, Nov 21 • 9:00 - 11:00 PM EST</div></div>
                 <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
-              <div class="event-badges">
-                <span class="status">Upcoming</span>
-              </div>
+              <div class="event-badges"><span class="status">Upcoming</span></div>
             </div>
-
             <div class="event">
               <div class="event-main">
-                <div class="event-header">
-                  <div class="event-date">Sat, Nov 28 • 2:00 - 4:00 PM EST</div>
-                </div>
+                <div class="event-header"><div class="event-date">Sat, Nov 28 • 2:00 - 4:00 PM EST</div></div>
                 <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
-              <div class="event-badges">
-                <span class="status">Upcoming</span>
-              </div>
+              <div class="event-badges"><span class="status">Upcoming</span></div>
             </div>
-
             <div class="event">
               <div class="event-main">
-                <div class="event-header">
-                  <div class="event-date">Sat, Nov 28 • 9:00 - 11:00 PM EST</div>
-                </div>
+                <div class="event-header"><div class="event-date">Sat, Nov 28 • 9:00 - 11:00 PM EST</div></div>
                 <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
-              <div class="event-badges">
-                <span class="status">Upcoming</span>
-              </div>
+              <div class="event-badges"><span class="status">Upcoming</span></div>
             </div>
-
             <div class="event">
               <div class="event-main">
-                <div class="event-header">
-                  <div class="event-date">Yesterday • 9:00 - 11:00 PM EST</div>
-                </div>
+                <div class="event-header"><div class="event-date">Yesterday • 9:00 - 11:00 PM EST</div></div>
                 <div class="event-offer">Gold Outfit <span class="multiplier">10x</span> &nbsp; Pirate Shop Access <span class="multiplier">2x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
               </div>
-              <div class="event-badges">
-                <span class="status is-ended">Ended</span>
-              </div>
+              <div class="event-badges"><span class="status is-ended">Ended</span></div>
             </div>
-
             <div class="event">
               <div class="event-main">
-                <div class="event-header">
-                  <div class="event-date">Yesterday • 2:00 - 4:00 PM EST</div>
-                </div>
+                <div class="event-header"><div class="event-date">Yesterday • 2:00 - 4:00 PM EST</div></div>
                 <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
-              <div class="event-badges">
-                <span class="status is-ended">Ended</span>
-              </div>
+              <div class="event-badges"><span class="status is-ended">Ended</span></div>
             </div>
           </div>
         </section>
@@ -363,60 +336,32 @@
         <section class="card" aria-labelledby="sprite-odds-title">
           <h2 class="odds-heading" id="sprite-odds-title"><span class="live">●</span> Live Sprite Odds</h2>
           <p class="section-desc">Current rates and chances</p>
-
           <div class="odds-row">
-            <div class="odds-item">
-              <img src="images/w2-outfit.png" alt="">
-              <strong>Skin For The Week</strong>
-            </div>
+            <div class="odds-item"><img src="images/w2-outfit.png" alt=""><strong>Skin For The Week</strong></div>
             <span class="odds">1 in 1,562,500</span>
           </div>
-
           <div class="odds-row">
-            <div class="odds-item">
-              <img src="images/token.png" alt="">
-              <strong>Pirate Access Pass</strong>
-            </div>
+            <div class="odds-item"><img src="images/token.png" alt=""><strong>Pirate Access Pass</strong></div>
             <span class="odds">1 in 137,500</span>
           </div>
-
           <div class="odds-row">
-            <div class="odds-item">
-              <img src="images/w2-car.png" alt="">
-              <strong>Vehicle Skin For The Week</strong>
-            </div>
+            <div class="odds-item"><img src="images/w2-car.png" alt=""><strong>Vehicle Skin For The Week</strong></div>
             <span class="odds">1 in 7,813</span>
           </div>
-
           <div class="odds-row">
-            <div class="odds-item">
-              <img src="images/w2-backbling.png" alt="">
-              <strong>Back bling For The Week</strong>
-            </div>
+            <div class="odds-item"><img src="images/w2-backbling.png" alt=""><strong>Back bling For The Week</strong></div>
             <span class="odds">1 in 568</span>
           </div>
-
           <div class="odds-row">
-            <div class="odds-item">
-              <img src="images/w2-jam.png" alt="">
-              <strong>Jam Track For The Week</strong>
-            </div>
+            <div class="odds-item"><img src="images/w2-jam.png" alt=""><strong>Jam Track For The Week</strong></div>
             <span class="odds">1 in 391</span>
           </div>
-
           <div class="odds-row">
-            <div class="odds-item">
-              <img src="images/w2-loading.png" alt="">
-              <strong>Loading Screen For The Week</strong>
-            </div>
+            <div class="odds-item"><img src="images/w2-loading.png" alt=""><strong>Loading Screen For The Week</strong></div>
             <span class="odds">1 in 272</span>
           </div>
-
           <div class="odds-row">
-            <div class="odds-item">
-              <img src="images/gizmo-smuggler-key.png" alt="">
-              <strong>Any Gizmo</strong>
-            </div>
+            <div class="odds-item"><img src="images/gizmo-smuggler-key.png" alt=""><strong>Any Gizmo</strong></div>
             <span class="odds">1 in 127</span>
           </div>
         </section>
