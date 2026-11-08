@@ -23,9 +23,7 @@
       --danger-soft: rgba(255, 90, 90, 0.18);
       --success-soft: rgba(57,255,136,0.09);
       --dark-panel: #0a0d0c;
-      --dark-panel-2: #101513;
-      --purple: #d0b7ff;
-      --soft-gray: rgba(255, 255, 255, 0.72);
+      --purple: #d9c5ff;
     }
 
     * {
@@ -270,8 +268,8 @@
 
     .feature-showcase {
       margin-top: 22px;
-      background: #0a0d0d;
-      border: 1px solid rgba(255,255,255,0.02);
+      background: rgba(10, 13, 13, 0.95);
+      border: 1px solid rgba(255,255,255,0.03);
       border-radius: 0;
       overflow: hidden;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
@@ -279,9 +277,9 @@
 
     .feature-quote {
       padding: 18px 20px 14px;
-      font-size: 1.05rem;
+      font-size: 1.07rem;
       line-height: 1.52;
-      color: rgba(242,255,246,.8);
+      color: rgba(242,255,246,.82);
       border-bottom: 1px solid rgba(255,255,255,.04);
       font-weight: 500;
       min-height: 84px;
@@ -299,8 +297,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      min-height: 180px;
-      padding: 24px 20px 14px 12px;
+      min-height: 178px;
+      padding: 20px 20px 4px 12px;
       background: rgba(255,255,255,0.01);
       border-bottom: 1px solid rgba(255,255,255,.04);
       overflow: hidden;
@@ -309,13 +307,13 @@
     .feature-banner::before {
       content: "";
       position: absolute;
-      left: 10px;
+      left: 18px;
       top: 18px;
       width: 220px;
       height: 220px;
       border-radius: 50%;
       background: radial-gradient(circle at 50% 30%, rgba(255,255,255,.18), rgba(255,255,255,0) 55%);
-      opacity: 0.2;
+      opacity: 0.22;
       filter: blur(18px);
     }
 
@@ -329,20 +327,20 @@
       justify-content: center;
       z-index: 1;
       margin-left: 10px;
-      transform: translateY(4px);
+      transform: translateY(8px);
     }
 
     .feature-character {
       position: relative;
-      width: 135px;
-      height: 135px;
+      width: 130px;
+      height: 130px;
       filter: grayscale(1) brightness(1.2) contrast(1.15);
     }
 
     .feature-character .head {
       position: absolute;
       left: 42px;
-      top: 10px;
+      top: 8px;
       width: 40px;
       height: 34px;
       border-radius: 48% 52% 46% 54%;
@@ -375,12 +373,12 @@
 
     .feature-character .body {
       position: absolute;
-      left: 26px;
+      left: 25px;
       top: 38px;
       width: 78px;
       height: 68px;
       border-radius: 18px 18px 20px 20px;
-      background: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.17);
       transform: rotate(4deg);
     }
 
@@ -388,18 +386,18 @@
       position: absolute;
       width: 16px;
       height: 82px;
-      top: 34px;
+      top: 36px;
       background: rgba(255,255,255,0.22);
       border-radius: 999px;
     }
 
     .feature-character .arm.left {
-      left: 12px;
+      left: 10px;
       transform: rotate(28deg);
     }
 
     .feature-character .arm.right {
-      right: 10px;
+      right: 8px;
       transform: rotate(-30deg);
     }
 
@@ -413,12 +411,12 @@
     }
 
     .feature-character .leg.left {
-      left: 44px;
+      left: 42px;
       transform: rotate(5deg);
     }
 
     .feature-character .leg.right {
-      right: 38px;
+      right: 36px;
       transform: rotate(-12deg);
     }
 
@@ -439,7 +437,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 22px;
+      gap: 20px;
       width: 100%;
       padding-left: 6px;
     }
@@ -449,21 +447,21 @@
     }
 
     .feature-week {
-      color: #d9c5ff;
+      color: var(--purple);
       font-weight: 900;
-      letter-spacing: 0.22em;
-      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      font-size: 0.77rem;
       text-transform: uppercase;
       margin-bottom: 10px;
       text-shadow: 0 0 20px rgba(167,102,255,.2);
     }
 
     .feature-name {
-      font-size: clamp(2.1rem, 4vw, 4rem);
+      font-size: clamp(2.3rem, 4vw, 4.2rem);
       line-height: 0.9;
-      letter-spacing: -0.06em;
+      letter-spacing: -0.07em;
       font-weight: 900;
-      color: rgba(255,255,255,0.72);
+      color: rgba(255,255,255,0.74);
       text-transform: uppercase;
       text-shadow: 0 0 22px rgba(0,0,0,.34);
       white-space: nowrap;
@@ -482,7 +480,7 @@
       text-transform: uppercase;
       padding-top: 12px;
       white-space: nowrap;
-      margin-right: 10px;
+      margin-right: 8px;
     }
 
     .feature-grid {
@@ -507,7 +505,7 @@
     .feature-card.feature-card--hero {
       grid-row: span 2;
       aspect-ratio: auto;
-      min-height: 410px;
+      min-height: 430px;
       background: linear-gradient(180deg, rgba(251,210,82,.18), rgba(255,255,255,.02));
       border-radius: 14px;
     }
