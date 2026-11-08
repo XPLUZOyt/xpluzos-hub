@@ -1,131 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Event Tracker</title>
-<style>
-:root{--background:#030806;--background-2:#07130c;--card:rgba(10,30,18,.72);--green:#39ff88;--white:#f2fff6;--muted:#91a69a;--border:rgba(57,255,136,.15);--border-hover:rgba(57,255,136,.5);--yellow:#f4d35e}
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif}
-body{min-height:100vh;background:radial-gradient(circle at 15% 10%,rgba(57,255,136,.09),transparent 30%),radial-gradient(circle at 85% 50%,rgba(19,184,92,.08),transparent 30%),linear-gradient(180deg,var(--background),var(--background-2),var(--background));color:var(--white)}
-.container{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:20px;max-width:1600px;margin:0 auto}
-.card{background:var(--card);border:1px solid var(--border);backdrop-filter:blur(15px);border-radius:18px;padding:20px;transition:.3s}
-.card:hover{border-color:var(--border-hover);box-shadow:0 20px 50px rgba(0,0,0,.25),0 0 30px rgba(57,255,136,.04)}
-.next-hour{display:flex;gap:20px;align-items:center}
-.logo{width:120px;height:120px;border-radius:16px;object-fit:cover}
-.badge{display:inline-block;background:#4b4313;color:var(--yellow);padding:6px 12px;border-radius:8px;font-weight:700;margin-bottom:10px}
-.countdown{font-size:clamp(2rem,4vw,4rem);font-weight:900;margin:10px 0;text-shadow:0 0 20px rgba(57,255,136,.2)}
-.subtitle,.section-desc{color:var(--muted)}
-.section-title{font-size:1.8rem;margin-bottom:5px}
-.section-desc{margin-bottom:20px}
-.event-list{max-height:450px;overflow-y:auto}
-.event-list::-webkit-scrollbar{width:8px}.event-list::-webkit-scrollbar-thumb{background:rgba(57,255,136,.2);border-radius:20px}.event-list::-webkit-scrollbar-thumb:hover{background:rgba(57,255,136,.4)}
-.event{padding:18px 0;border-top:1px solid var(--border)}
-.event-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}
-.status{background:#2a2d34;padding:5px 10px;border-radius:8px;font-weight:700;color:#bfc5d1}
-.multiplier{color:var(--green);font-weight:800}
-.odds-heading{margin-bottom:5px}.live{color:var(--green);text-shadow:0 0 10px var(--green)}
-.odds-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px 0;border-top:1px solid var(--border)}
-.odds-item{display:flex;align-items:center;gap:14px;min-width:0}.odds-item img{width:52px;height:52px;border-radius:10px;object-fit:cover}.odds-item strong{overflow-wrap:anywhere}.odds{font-weight:800;white-space:nowrap}
-.feature-showcase{margin-top:20px;background:rgba(10,15,13,.85);border:1px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02)}
-.feature-quote{padding:18px 20px;font-size:1.05rem;line-height:1.5;color:rgba(242,255,246,.85);border-bottom:1px solid rgba(255,255,255,.04)}
-.feature-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:150px;padding:24px;background:linear-gradient(180deg,rgba(255,255,255,.03),transparent)}
-.feature-char-title{flex:1;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-.feature-week{color:#d9c5ff;font-weight:900;letter-spacing:.25em;font-size:.8rem;text-transform:uppercase;margin-bottom:10px}
-.feature-name{font-size:clamp(2rem,4vw,4rem);line-height:.95;letter-spacing:-.05em;font-weight:900;color:#f2f6f5;text-transform:uppercase}
-.feature-name .highlight{color:#f7d778;text-shadow:0 0 18px rgba(247,215,120,.28)}
-.feature-ended{margin-top:10px;color:rgba(255,255,255,.55);font-size:.7rem;font-weight:800;letter-spacing:.25em;text-transform:uppercase}
-.feature-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:10px 14px 18px}
-/* Add your artwork to the images folder and update each src below to its filename. */
-.feature-card{height:220px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);overflow:hidden}
-.feature-card img{display:block;width:100%;height:100%;object-fit:cover}
-@media(max-width:900px){.container{grid-template-columns:1fr}.next-hour{flex-direction:column;text-align:center}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){.container{padding:12px}.feature-grid{grid-template-columns:1fr}.feature-banner{padding:20px}.feature-char-title{width:100%}.feature-name{font-size:2.3rem}.odds-row{align-items:flex-start;flex-direction:column}.odds-item{width:100%}.odds{margin-left:66px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Tracker</title>
+  <style>
+    :root {
+      --background: #030806;
+      --background-2: #07130c;
+      --card: rgba(10, 30, 18, 0.72);
+      --green: #39ff88;
+      --white: #f2fff6;
+      --muted: #91a69a;
+      --border: rgba(57, 255, 136, 0.15);
+      --border-hover: rgba(57, 255, 136, 0.5);
+      --yellow: #f7d778;
+      --panel-dark: rgba(8, 12, 10, 0.9);
+      --text-soft: rgba(255, 255, 255, 0.76);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(57,255,136,.09), transparent 30%),
+        radial-gradient(circle at 85% 50%, rgba(19,184,92,.08), transparent 30%),
+        linear-gradient(180deg, var(--background) 0%, var(--background-2) 100%);
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .container {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 22px 18px 40px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(15px);
+      border-radius: 18px;
+      padding: 20px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 20px 50px rgba(0,0,0,.25), 0 0 30px rgba(57,255,136,.04);
+    }
+
+    .next-hour {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
+      object-fit: cover;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(75, 67, 19, 0.9);
+      color: var(--yellow);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.68rem;
+    }
+
+    .countdown {
+      font-size: clamp(2rem, 4vw, 4rem);
+      font-weight: 900;
+      margin: 10px 0;
+      text-shadow: 0 0 20px rgba(57,255,136,.2);
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle,
+    .section-desc {
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    .section-desc {
+      margin-bottom: 20px;
+    }
+
+    .event-list {
+      max-height: 450px;
+      overflow-y: auto;
+    }
+
+    .event-list::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .event-list::-webkit-scrollbar-thumb {
+      background: rgba(57,255,136,.2);
+      border-radius: 20px;
+    }
+
+    .event-list::-webkit-scrollbar-thumb:hover {
+      background: rgba(57,255,136,.4);
+    }
+
+    .event {
+      padding: 18px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .event-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
+    .status {
+      background: #2a2d34;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      color: #bfc5d1;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .multiplier {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .odds-heading {
+      margin-bottom: 5px;
+      letter-spacing: 0.04em;
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+    }
+
+    .live {
+      color: var(--green);
+      text-shadow: 0 0 10px var(--green);
+    }
+
+    .odds-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .odds-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+      color: var(--white);
+    }
+
+    .odds-item img {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .odds-item strong {
+      overflow-wrap: anywhere;
+      font-size: 0.98rem;
+    }
+
+    .odds {
+      font-weight: 800;
+      color: var(--white);
+      white-space: nowrap;
+    }
+
+    .feature-showcase {
+      margin-top: 22px;
+      background: rgba(10,15,13, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+
+    .feature-quote {
+      padding: 18px 20px 14px;
+      font-size: 1.09rem;
+      line-height: 1.5;
+      color: rgba(242,255,246,.85);
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      font-weight: 500;
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      max-width: 100%;
+    }
+
+    .feature-banner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 160px;
+      padding: 20px 24px 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      overflow: hidden;
+    }
+
+    .feature-banner::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 20px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 30%, rgba(255,255,255,.2), rgba(255,255,255,0) 50%);
+      opacity: 0.35;
+      filter: blur(18px);
+    }
+
+    .feature-banner-art {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      flex: 0 0 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .feature-banner-art::before {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 95px;
+      border-radius: 50% 50% 38% 38%;
+      background: rgba(255,255,255,.14);
+      box-shadow: 0 0 0 7px rgba(120,120,120,.15);
+      transform: translateY(12px);
+      filter: blur(0.4px);
+    }
+
+    .feature-banner-art::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 124px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius: 40% 40% 18% 18%;
+      transform: translateY(30px) scaleX(1.1);
+      opacity: 0.8;
+      box-shadow: inset 0 0 18px rgba(255,255,255,.12);
+    }
+
+    .feature-char-title {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+      padding-left: 6px;
+    }
+
+    .feature-week {
+      color: #d9c5ff;
+      font-weight: 900;
+      letter-spacing: 0.25em;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .feature-name {
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      font-weight: 900;
+      color: #f2f6f5;
+      text-transform: uppercase;
+      text-shadow: 0 0 22px rgba(0,0,0,.34);
+      white-space: nowrap;
+    }
+
+    .feature-name .highlight {
+      color: #f7d778;
+      text-shadow: 0 0 18px rgba(247,215,120,.28);
+    }
+
+    .feature-ended {
+      color: rgba(255,255,255,.55);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding-top: 10px;
+      white-space: nowrap;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      padding: 16px 16px 18px;
+      background: rgba(0,0,0,.12);
+    }
+
+    .feature-card {
+      position: relative;
+      height: 220px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.02);
+    }
+
+    .feature-card.feature-card--hero {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      height: 100%;
+      min-height: 455px;
+      background: linear-gradient(180deg, rgba(255,214,90,.28), rgba(255,214,90,.08));
+    }
+
+    .feature-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .feature-card--hero img {
+      object-fit: cover;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .next-hour {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .feature-card.feature-card--hero {
+        grid-column: auto;
+        grid-row: auto;
+        min-height: 240px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        padding: 12px;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-banner {
+        padding: 20px 16px;
+      }
+
+      .feature-char-title {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .feature-name {
+        font-size: 2.3rem;
+      }
+
+      .odds-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-  <main>
-    <section class="card next-hour" aria-label="Next sprite event">
-      <img src="images/token.png" class="logo" alt="Xpluzo">
-      <div>
-        <div class="badge">✨ NEXT SPRITE EVENT</div>
-        <div class="subtitle">Starts In</div>
-        <div class="countdown" id="countdown">00:00:00:00</div>
-        <div class="subtitle">Xpluzo's Hub Event Schedule</div>
-      </div>
-    </section>
+  <div class="container">
+    <main>
+      <section class="card next-hour" aria-label="Next sprite event">
+        <img src="images/token.png" class="logo" alt="Xpluzo">
+        <div>
+          <div class="badge">✨ Next Sprite Event</div>
+          <div class="subtitle">Starts In</div>
+          <div class="countdown" id="countdown">00:00:00:00</div>
+          <div class="subtitle">Xpluzo's Hub Event Schedule</div>
+        </div>
+      </section>
 
-    <section class="card" style="margin-top:20px" aria-labelledby="event-hours-title">
-      <h2 class="section-title" id="event-hours-title">EVENT HOURS</h2>
-      <p class="section-desc">Upcoming scheduled events</p>
-      <div class="event-list">
-        <div class="event">
-          <div class="event-header"><strong>Nov 14 • 2 PM</strong><span class="status">NEXT</span></div>
-          Gold Boost <span class="multiplier">7.5x</span> • Shop Access <span class="multiplier">1.5x</span>
-        </div>
-        <div class="event">
-          <div class="event-header"><strong>Nov 14 • 9 PM</strong><span class="status">UPCOMING</span></div>
-          Gold Boost <span class="multiplier">7.5x</span>
-        </div>
-        <div class="event">
-          <div class="event-header"><strong>Nov 21 • 2 PM</strong><span class="status">UPCOMING</span></div>
-          Gold Boost <span class="multiplier">7.5x</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="feature-showcase" aria-label="ASAP feature">
-      <div class="feature-quote">"Treasure drop rates from chests are constant since season launch and don't vary throughout the day, except during Treasures. Other than Gizmos, you can't get the same treasure twice." — Epic Games</div>
-      <div class="feature-banner">
-        <div class="feature-char-title">
-          <div>
-            <div class="feature-week">Week 1 • Nov 1 – 8</div>
-            <div class="feature-name"><span class="highlight">A</span>SAP ARRIVES</div>
+      <section class="card" style="margin-top:20px" aria-labelledby="event-hours-title">
+        <h2 class="section-title" id="event-hours-title">Event Hours</h2>
+        <p class="section-desc">Upcoming scheduled events</p>
+        <div class="event-list">
+          <div class="event">
+            <div class="event-header"><strong>Nov 14 • 2 PM</strong><span class="status">Next</span></div>
+            Gold Boost <span class="multiplier">7.5x</span> • Shop Access <span class="multiplier">1.5x</span>
           </div>
-          <div class="feature-ended">Ended</div>
+          <div class="event">
+            <div class="event-header"><strong>Nov 14 • 9 PM</strong><span class="status">Upcoming</span></div>
+            Gold Boost <span class="multiplier">7.5x</span>
+          </div>
+          <div class="event">
+            <div class="event-header"><strong>Nov 21 • 2 PM</strong><span class="status">Upcoming</span></div>
+            Gold Boost <span class="multiplier">7.5x</span>
+          </div>
         </div>
-      </div>
-      <div class="feature-grid">
-        <div class="feature-card"><img src="images/treasure-1.png" alt="ASAP feature image 1"></div>
-        <div class="feature-card"><img src="images/treasure-2.png" alt="ASAP feature image 2"></div>
-        <div class="feature-card"><img src="images/treasure-3.png" alt="ASAP feature image 3"></div>
-        <div class="feature-card"><img src="images/treasure-4.png" alt="ASAP feature image 4"></div>
-        <div class="feature-card"><img src="images/treasure-5.png" alt="ASAP feature image 5"></div>
-        <div class="feature-card"><img src="images/treasure-6.png" alt="ASAP feature image 6"></div>
-        <div class="feature-card"><img src="images/treasure-7.png" alt="ASAP feature image 7"></div>
-        <div class="feature-card"><img src="images/treasure-8.png" alt="ASAP feature image 8"></div>
-        <div class="feature-card"><img src="images/treasure-9.png" alt="ASAP feature image 9"></div>
-        <div class="feature-card"><img src="images/treasure-10.png" alt="ASAP feature image 10"></div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <section class="card" aria-labelledby="sprite-odds-title">
-    <h2 class="odds-heading" id="sprite-odds-title"><span class="live">●</span> LIVE SPRITE ODDS</h2>
-    <p class="section-desc">Current rates and chances</p>
-    <div class="odds-row"><div class="odds-item"><img src="images/w2-outfit.png" alt=""><strong>Skin For The Week</strong></div><span class="odds">1 in 1,562,500</span></div>
-    <div class="odds-row"><div class="odds-item"><img src="images/token.png" alt=""><strong>Pirate Access Pass</strong></div><span class="odds">1 in 137,500</span></div>
-    <div class="odds-row"><div class="odds-item"><img src="images/w2-car.png" alt=""><strong>Vehicle Skin For The Week</strong></div><span class="odds">1 in 7,813</span></div>
-    <div class="odds-row"><div class="odds-item"><img src="images/w2-backbling.png" alt=""><strong>Pickaxe/Backbling For The Week</strong></div><span class="odds">1 in 568</span></div>
-    <div class="odds-row"><div class="odds-item"><img src="images/w2-jam.png" alt=""><strong>Jam Track For The Week</strong></div><span class="odds">1 in 391</span></div>
-    <div class="odds-row"><div class="odds-item"><img src="images/w2-loading.png" alt=""><strong>Loading Screen For The Week</strong></div><span class="odds">1 in 272</span></div>
-    <div class="odds-row"><div class="odds-item"><img src="images/gizmo-smuggler-key.png" alt=""><strong>Any Gizmo</strong></div><span class="odds">1 in 127</span></div>
-  </section>
-</div>
-<script>
-const targetDate = new Date("2026-11-14T14:00:00");
-function updateCountdown(){
-  const diff = targetDate - new Date();
-  if(diff <= 0){document.getElementById("countdown").textContent = "LIVE";return;}
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor(diff % 86400000 / 3600000);
-  const mins = Math.floor(diff % 3600000 / 60000);
-  const secs = Math.floor(diff % 60000 / 1000);
-  document.getElementById("countdown").textContent = `${days}:${String(hours).padStart(2,"0")}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
-}
-updateCountdown();
-setInterval(updateCountdown,1000);
-</script>
+      <section class="feature-showcase" aria-label="ASAP feature">
+        <div class="feature-quote">“Treasure drop rates from chests are constant since season launch and don't vary throughout the day, except during Treasures. Other than Gizmos, you can't get the same treasure twice.” – Epic Games</div>
+
+        <div class="feature-banner">
+          <div class="feature-banner-art" aria-hidden="true"></div>
+          <div class="feature-char-title">
+            <div>
+              <div class="feature-week">Week 1 • Nov 1 – 8</div>
+              <div class="feature-name"><span class="highlight">A</span>SAP ARRIVES</div>
+            </div>
+            <div class="feature-ended">Ended</div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card feature-card--hero"><img src="images/treasure-1.png" alt="ASAP feature hero reward"></div>
+          <div class="feature-card"><img src="images/treasure-2.png" alt="ASAP feature image 2"></div>
+          <div class="feature-card"><img src="images/treasure-3.png" alt="ASAP feature image 3"></div>
+          <div class="feature-card"><img src="images/treasure-4.png" alt="ASAP feature image 4"></div>
+          <div class="feature-card"><img src="images/treasure-5.png" alt="ASAP feature image 5"></div>
+
+          <div class="feature-card"><img src="images/treasure-6.png" alt="ASAP feature image 6"></div>
+          <div class="feature-card"><img src="images/treasure-7.png" alt="ASAP feature image 7"></div>
+          <div class="feature-card"><img src="images/treasure-8.png" alt="ASAP feature image 8"></div>
+          <div class="feature-card"><img src="images/treasure-9.png" alt="ASAP feature image 9"></div>
+        </div>
+      </section>
+    </main>
+
+    <section class="card" aria-labelledby="sprite-odds-title" style="margin-top: 22px;">
+      <h2 class="odds-heading" id="sprite-odds-title"><span class="live">●</span> Live Sprite Odds</h2>
+      <p class="section-desc">Current rates and chances</p>
+      <div class="odds-row"><div class="odds-item"><img src="images/w2-outfit.png" alt=""><strong>Skin For The Week</strong></div><span class="odds">1 in 1,562,500</span></div>
+      <div class="odds-row"><div class="odds-item"><img src="images/token.png" alt=""><strong>Pirate Access Pass</strong></div><span class="odds">1 in 137,500</span></div>
+      <div class="odds-row"><div class="odds-item"><img src="images/w2-car.png" alt=""><strong>Vehicle Skin For The Week</strong></div><span class="odds">1 in 7,813</span></div>
+      <div class="odds-row"><div class="odds-item"><img src="images/w2-backbling.png" alt=""><strong>Pickaxe/Backbling For The Week</strong></div><span class="odds">1 in 568</span></div>
+      <div class="odds-row"><div class="odds-item"><img src="images/w2-jam.png" alt=""><strong>Jam Track For The Week</strong></div><span class="odds">1 in 391</span></div>
+      <div class="odds-row"><div class="odds-item"><img src="images/w2-loading.png" alt=""><strong>Loading Screen For The Week</strong></div><span class="odds">1 in 272</span></div>
+      <div class="odds-row"><div class="odds-item"><img src="images/gizmo-smuggler-key.png" alt=""><strong>Any Gizmo</strong></div><span class="odds">1 in 127</span></div>
+    </section>
+  </div>
+
+  <script>
+    const targetDate = new Date("2026-11-14T14:00:00");
+    function updateCountdown() {
+      const diff = targetDate - new Date();
+      if (diff <= 0) {
+        document.getElementById("countdown").textContent = "LIVE";
+        return;
+      }
+
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor(diff % 86400000 / 3600000);
+      const mins = Math.floor(diff % 3600000 / 60000);
+      const secs = Math.floor(diff % 60000 / 1000);
+      document.getElementById("countdown").textContent = `${days}:${String(hours).padStart(2,"0")}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
