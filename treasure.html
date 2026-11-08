@@ -395,7 +395,7 @@
 
     .feature-grid {
       display: grid;
-      grid-template-columns: 1.15fr repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
       gap: 14px;
       padding: 16px 16px 18px;
       background: rgba(0,0,0,.12);
@@ -403,7 +403,8 @@
 
     .feature-card {
       position: relative;
-      height: 220px;
+      aspect-ratio: 1;
+      min-width: 0;
       border-radius: 18px;
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,255,255,.08);
@@ -412,10 +413,10 @@
     }
 
     .feature-card.feature-card--hero {
-      grid-column: 1;
-      grid-row: 1 / span 2;
-      height: 100%;
-      min-height: 455px;
+      grid-column: auto;
+      grid-row: auto;
+      height: auto;
+      min-height: 0;
       background: linear-gradient(180deg, rgba(255,214,90,.28), rgba(255,214,90,.08));
     }
 
@@ -504,7 +505,7 @@
                 <div class="event-header">
                   <div class="event-date">Sat, Nov 14 • 2:00 - 4:00 PM EST</div>
                 </div>
-                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
+                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
               <div class="event-badges">
                 <span class="status is-next">Next Treasure Hour</span>
@@ -516,7 +517,7 @@
                 <div class="event-header">
                   <div class="event-date">Sat, Nov 14 • 9:00 - 11:00 PM EST</div>
                 </div>
-                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
+                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
               <div class="event-badges">
                 <span class="status">Upcoming</span>
@@ -528,7 +529,7 @@
                 <div class="event-header">
                   <div class="event-date">Sat, Nov 21 • 2:00 - 4:00 PM EST</div>
                 </div>
-                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
+                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
               <div class="event-badges">
                 <span class="status">Upcoming</span>
@@ -540,7 +541,7 @@
                 <div class="event-header">
                   <div class="event-date">Sat, Nov 21 • 9:00 - 11:00 PM EST</div>
                 </div>
-                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
+                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
               <div class="event-badges">
                 <span class="status">Upcoming</span>
@@ -552,7 +553,7 @@
                 <div class="event-header">
                   <div class="event-date">Sat, Nov 28 • 2:00 - 4:00 PM EST</div>
                 </div>
-                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
+                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
               <div class="event-badges">
                 <span class="status">Upcoming</span>
@@ -564,7 +565,7 @@
                 <div class="event-header">
                   <div class="event-date">Sat, Nov 28 • 9:00 - 11:00 PM EST</div>
                 </div>
-                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
+                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
               <div class="event-badges">
                 <span class="status">Upcoming</span>
@@ -588,7 +589,7 @@
                 <div class="event-header">
                   <div class="event-date">Yesterday • 2:00 - 4:00 PM EST</div>
                 </div>
-                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
+                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">7.5x</span></div>
               </div>
               <div class="event-badges">
                 <span class="status is-ended">Ended</span>
