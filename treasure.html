@@ -17,6 +17,8 @@
       --yellow: #f7d778;
       --panel-dark: rgba(8, 12, 10, 0.9);
       --text-soft: rgba(255, 255, 255, 0.76);
+      --status-bg: rgba(255,255,255,0.07);
+      --status-text: #dfe7e3;
     }
 
     * {
@@ -106,13 +108,16 @@
 
     .schedule-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
       align-items: start;
       gap: 20px;
       margin-top: 20px;
     }
 
     .event-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
       max-height: 450px;
       overflow-y: auto;
     }
@@ -131,27 +136,72 @@
     }
 
     .event {
-      padding: 18px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 16px;
       border-top: 1px solid var(--border);
+      background: rgba(0,0,0,0.08);
+    }
+
+    .event:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .event-main {
+      flex: 1;
+      min-width: 0;
     }
 
     .event-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
-      gap: 10px;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .event-date {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+
+    .event-badges {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-width: 175px;
     }
 
     .status {
-      background: #2a2d34;
-      padding: 5px 10px;
-      border-radius: 8px;
-      font-weight: 700;
-      color: #bfc5d1;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.05);
+      color: var(--status-text);
+      padding: 7px 12px;
+      border-radius: 9px;
+      font-weight: 800;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      text-align: center;
+      line-height: 1;
+      min-width: 120px;
+    }
+
+    .status.is-next {
+      background: rgba(247,215,120,.12);
+      color: var(--yellow);
+      border-color: rgba(247,215,120,.30);
+    }
+
+    .event-offer {
+      color: var(--white);
+      font-size: 1.02rem;
+      letter-spacing: 0.01em;
     }
 
     .multiplier {
@@ -441,16 +491,51 @@
           <p class="section-desc">Upcoming scheduled events</p>
           <div class="event-list">
             <div class="event">
-              <div class="event-header"><strong>Nov 14 • 2 PM</strong><span class="status">Next</span></div>
-              Gold Boost <span class="multiplier">7.5x</span> • Shop Access <span class="multiplier">1.5x</span>
+              <div class="event-main">
+                <div class="event-header">
+                  <div class="event-date">Sat, Nov 14 • 2:00 - 4:00 PM EST</div>
+                </div>
+                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
+              </div>
+              <div class="event-badges">
+                <span class="status is-next">Next Treasure Hour</span>
+              </div>
             </div>
+
             <div class="event">
-              <div class="event-header"><strong>Nov 14 • 9 PM</strong><span class="status">Upcoming</span></div>
-              Gold Boost <span class="multiplier">7.5x</span>
+              <div class="event-main">
+                <div class="event-header">
+                  <div class="event-date">Sat, Nov 14 • 9:00 - 11:00 PM EST</div>
+                </div>
+                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
+              </div>
+              <div class="event-badges">
+                <span class="status">Upcoming</span>
+              </div>
             </div>
+
             <div class="event">
-              <div class="event-header"><strong>Nov 21 • 2 PM</strong><span class="status">Upcoming</span></div>
-              Gold Boost <span class="multiplier">7.5x</span>
+              <div class="event-main">
+                <div class="event-header">
+                  <div class="event-date">Sat, Nov 21 • 2:00 - 4:00 PM EST</div>
+                </div>
+                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
+              </div>
+              <div class="event-badges">
+                <span class="status">Upcoming</span>
+              </div>
+            </div>
+
+            <div class="event">
+              <div class="event-main">
+                <div class="event-header">
+                  <div class="event-date">Sat, Nov 21 • 9:00 - 11:00 PM EST</div>
+                </div>
+                <div class="event-offer">Gold Outfit <span class="multiplier">7.5x</span> &nbsp; Pirate Shop Access <span class="multiplier">1.5x</span> &nbsp; Vehicle &amp; Decal <span class="multiplier">10x</span></div>
+              </div>
+              <div class="event-badges">
+                <span class="status">Upcoming</span>
+              </div>
             </div>
           </div>
         </section>
