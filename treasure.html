@@ -370,25 +370,84 @@
   </div>
 
   <script>
-    const targetDate = new Date("2026-11-14T14:00:00");
+    const schedule = [
+      { start: new Date("2026-11-14T14:00:00-05:00"), end: new Date("2026-11-14T16:00:00-05:00") },
+      { start: new Date("2026-11-14T21:00:00-05:00"), end: new Date("2026-11-15T23:00:00-05:00") },
+      { start: new Date("2026-11-21T14:00:00-05:00"), end: new Date("2026-11-21T16:00:00-05:00") },
+      { start: new Date("2026-11-21T21:00:00-05:00"), end: new Date("2026-11-22T23:00:00-05:00") },
+      { start: new Date("2026-11-28T14:00:00-05:00"), end: new Date("2026-11-28T16:00:00-05:00") },
+      { start: new Date("2026-11-28T21:00:00-05:00"), end: new Date("2026-11-29T23:00:00-05:00") }
+    ];
 
-    function updateCountdown() {
-      const diff = targetDate - new Date();
-      if (diff <= 0) {
-        document.getElementById("countdown").textContent = "LIVE";
+    const rows = [...document.querySelectorAll(".event-list .event")];
+    const countdownEl = document.getElementById("countdown");
+
+    function updateSchedule() {
+      const now = new Date();
+
+      let nextEvent = null;
+      let activeEvent = null;
+
+      rows.forEach((row, index) => {
+        const statusEl = row.querySelector(".status");
+        if (!statusEl) return;
+
+        const event = schedule[index] || null;
+
+        if (!event) {
+          statusEl.textContent = "Ended";
+          statusEl.classList.add("is-ended");
+          statusEl.classList.remove("is-next");
+          return;
+        }
+
+        if (now >= event.end) {
+          statusEl.textContent = "Ended";
+          statusEl.classList.add("is-ended");
+          statusEl.classList.remove("is-next");
+          return;
+        }
+
+        if (now >= event.start && now < event.end) {
+          statusEl.textContent = "In Progress";
+          statusEl.classList.remove("is-ended", "is-next");
+          activeEvent = event;
+          return;
+        }
+
+        if (!nextEvent) {
+          statusEl.textContent = "Next Treasure Hour";
+          statusEl.classList.add("is-next");
+          statusEl.classList.remove("is-ended");
+          nextEvent = event;
+          return;
+        }
+
+        statusEl.textContent = "Upcoming";
+        statusEl.classList.remove("is-ended", "is-next");
+      });
+
+      if (activeEvent) {
+        countdownEl.textContent = "LIVE";
         return;
       }
 
+      if (!nextEvent) {
+        countdownEl.textContent = "00:00:00:00";
+        return;
+      }
+
+      const diff = nextEvent.start - now;
       const days = Math.floor(diff / 86400000);
       const hours = Math.floor((diff % 86400000) / 3600000);
       const minutes = Math.floor((diff % 3600000) / 60000);
-      const secs = Math.floor((diff % 60000) / 1000);
+      const seconds = Math.floor((diff % 60000) / 1000);
 
-      document.getElementById("countdown").textContent = `${String(days).padStart(2, "0")}:${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+      countdownEl.textContent = `${String(days).padStart(2, "0")}:${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
     }
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    updateSchedule();
+    setInterval(updateSchedule, 1000);
   </script>
 </body>
 </html>
