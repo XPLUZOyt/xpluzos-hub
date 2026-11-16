@@ -4,1055 +4,1597 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sprite Index | XPLUZO's index</title>
+<title>✨ Xpluzo's Hub ✨</title>
+
+<meta name="description" content="Xpluzo's Hub — A growing community built on trust, friendship, and nonstop fun.">
 
 <style>
-input,
-select{
-    padding:12px 15px;
-    border:none;
-    border-radius:12px;
-    background:var(--card);
-    color:white;
-}
-.controls button{
-    padding:12px 18px;
-    border:none;
-    border-radius:12px;
-    background:var(--green);
-    color:black;
-    font-weight:700;
-    cursor:pointer;
-    transition:.3s;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-.controls button:hover{
-    opacity:.9;
-}
+/* =====================================================
+   VARIABLES
+===================================================== */
 
-:root{
-    --green:#39ff88;
-    --card:rgba(10,30,18,.75);
-    --border:rgba(57,255,136,.15);
-    --white:#f2fff6;
-    --muted:#91a69a;
+:root {
+    --background: #030806;
+    --background-2: #07130c;
+    --green: #39ff88;
+    --green-light: #8affb9;
+    --green-dark: #13b85c;
+    --white: #f2fff6;
+    --text: #d8e9dd;
+    --muted: #91a69a;
+
+    --card: rgba(10, 30, 18, 0.72);
+    --card-hover: rgba(13, 42, 24, 0.85);
+
+    --border: rgba(57, 255, 136, 0.15);
+    --border-hover: rgba(57, 255, 136, 0.5);
+
+    --glow: rgba(57, 255, 136, 0.25);
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-    body,
-.card,
-input,
-select,
-.back,
-.theme-toggle,
-.progress-track,
-.progress-fill,
-.mastered-fill{
-transition:
-background-color .4s ease,
-background .4s ease,
-color .4s ease,
-border-color .4s ease,
-box-shadow .4s ease,
-opacity .4s ease;
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    font-family:Inter,sans-serif;
-    background:#030806;
-    color:var(--white);
+html {
+    scroll-behavior: smooth;
+}
 
-    min-height:100vh;
+body {
+    min-height: 100vh;
 
-    padding:40px;
+    font-family: "Inter", sans-serif;
+
+    color: var(--white);
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(57, 255, 136, 0.09),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 50%,
+            rgba(19, 184, 92, 0.08),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            var(--background),
+            var(--background-2),
+            var(--background)
+        );
+
+    overflow-x: hidden;
+}
+
+::selection {
+    background: var(--green);
+    color: #031008;
+}
+
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+#particles {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: -5;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   BACKGROUND GLOW
+===================================================== */
+
+.background-glow {
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background: var(--green);
+
+    filter: blur(160px);
+
+    opacity: 0.035;
+
+    pointer-events: none;
+
+    z-index: -4;
+
+    animation: glowMove 12s ease-in-out infinite alternate;
+}
+
+.glow-one {
+    top: -200px;
+    left: -200px;
+}
+
+.glow-two {
+    right: -250px;
+    bottom: -200px;
+
+    animation-delay: -5s;
+}
+
+@keyframes glowMove {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+
+    to {
+        transform: translate(100px, 70px) scale(1.2);
+    }
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+nav {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    z-index: 1000;
+
+    padding: 17px 6%;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(3, 8, 6, 0.72);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid rgba(57, 255, 136, 0.08);
+
+    transition: 0.3s ease;
+}
+
+nav.scrolled {
+    background: rgba(3, 8, 6, 0.92);
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--white);
+
+    text-decoration: none;
+
+    font-size: 1.15rem;
+
+    font-weight: 800;
+}
+
+.logo-highlight {
+    color: var(--green);
+}
+
+.nav-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+}
+
+.nav-links a {
+    color: var(--muted);
+
+    text-decoration: none;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+    transition: 0.25s ease;
+}
+
+.nav-links a:hover {
+    color: var(--green);
+}
+
+.nav-discord {
+    padding: 10px 17px;
+
+    border-radius: 10px;
+
+    background: var(--green);
+
+    color: #031008 !important;
+
+    box-shadow:
+        0 0 20px var(--glow);
+}
+
+.nav-discord:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 30px rgba(57, 255, 136, 0.4);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 140px 20px 100px;
+
+    position: relative;
+}
+
+.hero-content {
+    max-width: 900px;
+
+    animation: heroAppear 1s ease forwards;
+}
+
+@keyframes heroAppear {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 16px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 50px;
+
+    background: rgba(57, 255, 136, 0.06);
+
+    color: var(--green);
+
+    font-size: 0.8rem;
+
+    font-weight: 700;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 0 25px rgba(57, 255, 136, 0.05);
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--green);
+
+    box-shadow:
+        0 0 10px var(--green);
+
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.45;
+        transform: scale(0.7);
+    }
+}
+
+.hero h1 {
+    font-size: clamp(3.2rem, 9vw, 7rem);
+
+    line-height: 0.95;
+
+    letter-spacing: -5px;
+
+    font-weight: 900;
+
+    margin-bottom: 28px;
+}
+
+.hero h1 .green {
+    color: var(--green);
+
+    text-shadow:
+        0 0 20px rgba(57, 255, 136, 0.2),
+        0 0 60px rgba(57, 255, 136, 0.1);
+}
+
+.hero-description {
+    max-width: 680px;
+
+    margin: auto;
+
+    color: var(--muted);
+
+    font-size: 1.08rem;
+
+    line-height: 1.8;
+}
+
+.hero-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+    margin-top: 35px;
+}
+
+.button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 14px 22px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-size: 0.9rem;
+
+    font-weight: 800;
+
+    transition: all 0.3s ease;
+}
+
+.button-primary {
+    background: var(--green);
+
+    color: #031008;
+
+    box-shadow:
+        0 0 25px rgba(57, 255, 136, 0.18);
+}
+
+.button-primary:hover {
+    transform: translateY(-4px) scale(1.02);
+
+    box-shadow:
+        0 10px 40px rgba(57, 255, 136, 0.3);
+}
+
+.button-secondary {
+    border: 1px solid var(--border);
+
+    background: rgba(255, 255, 255, 0.025);
+
+    color: var(--white);
+}
+
+.button-secondary:hover {
+    transform: translateY(-4px);
+
+    color: var(--green);
+
+    border-color: var(--border-hover);
+
+    background: rgba(57, 255, 136, 0.05);
+}
+
+.scroll-indicator {
+    position: absolute;
+
+    bottom: 35px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: var(--muted);
+
+    font-size: 0.7rem;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translate(-50%, 0);
+    }
+
+    50% {
+        transform: translate(-50%, 8px);
+    }
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+section {
+    padding: 110px 6%;
+}
+
+.section-heading {
+    text-align: center;
+
+    margin-bottom: 55px;
+}
+
+.section-label {
+    color: var(--green);
+
+    font-size: 0.75rem;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 10px;
+}
+
+.section-heading h2 {
+    font-size: clamp(2rem, 5vw, 3.3rem);
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 15px;
+}
+
+.section-heading p {
+    max-width: 600px;
+
+    margin: auto;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   FEATURES
+===================================================== */
+
+.features {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.feature-card {
+    position: relative;
+
+    padding: 30px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    background: var(--card);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    overflow: hidden;
+
+    transition: 0.35s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+
+    border-color: var(--border-hover);
+
+    background: var(--card-hover);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25),
+        0 0 30px rgba(57, 255, 136, 0.04);
+}
+
+.feature-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: rgba(57, 255, 136, 0.08);
+
+    border: 1px solid rgba(57, 255, 136, 0.1);
+
+    font-size: 1.7rem;
+
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 1.1rem;
+
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: var(--muted);
+
+    line-height: 1.65;
+
+    font-size: 0.9rem;
+}
+
+
+/* =====================================================
+   STAFF
+===================================================== */
+
+.staff-grid {
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+.staff-card {
+    position: relative;
+
+    width: 100%;
+
+    min-width: 0;
+
+    padding: 32px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    background: var(--card);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    overflow: hidden;
+
+    transition: 0.35s ease;
+}
+
+.staff-card:hover {
+    transform: translateY(-8px);
+
+    border-color: var(--border-hover);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(57, 255, 136, 0.04);
+}
+
+.staff-top {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 24px;
+
+    min-width: 0;
+}
+
+.staff-avatar {
+    width: 85px;
+    height: 85px;
+
+    flex: 0 0 85px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #154e2b,
+            #07160d
+        );
+
+    border: 2px solid var(--green);
+
+    box-shadow:
+        0 0 25px rgba(57, 255, 136, 0.15);
+
+    font-size: 2.3rem;
+
+    overflow: hidden;
+}
+
+.staff-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.staff-info {
+    min-width: 0;
+}
+
+.staff-info h3 {
+    font-size: 1.35rem;
+
+    margin-bottom: 5px;
+
+    overflow-wrap: anywhere;
+}
+
+.staff-role {
+    display: inline-block;
+
+    color: var(--green);
+
+    font-size: 0.78rem;
+
+    font-weight: 800;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+.staff-description {
+    color: var(--muted);
+
+    line-height: 1.75;
+
+    font-size: 0.92rem;
+
+    margin-bottom: 22px;
+}
+
+.staff-tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.staff-tag {
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    color: #bcebcf;
+
+    background: rgba(57, 255, 136, 0.06);
+
+    border: 1px solid rgba(57, 255, 136, 0.1);
+
+    font-size: 0.7rem;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   DISCORD
+===================================================== */
+
+.discord-section {
+    padding-top: 40px;
+}
+
+.discord-box {
+    position: relative;
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 75px 30px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(57, 255, 136, 0.25);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(57, 255, 136, 0.1),
+            rgba(6, 17, 11, 0.8) 65%
+        );
+
+    box-shadow:
+        inset 0 0 100px rgba(57, 255, 136, 0.025);
+}
+
+.discord-box h2 {
+    font-size: clamp(2rem, 5vw, 3.3rem);
+
+    margin-bottom: 14px;
+}
+
+.discord-box p {
+    color: var(--muted);
+
+    margin-bottom: 28px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    padding: 35px 6%;
+
+    text-align: center;
+
+    border-top: 1px solid rgba(57, 255, 136, 0.07);
+
+    color: #64786a;
+
+    font-size: 0.82rem;
+}
+
+footer span {
+    color: var(--green);
+}
+
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(35px);
 
     transition:
-    background-color .5s ease,
-    color .5s ease;
+        opacity 0.8s ease,
+        transform 0.8s ease;
 }
 
-h1{
-    text-align:center;
-    margin-bottom:25px;
+.reveal.active {
+    opacity: 1;
+
+    transform: translateY(0);
 }
 
-.controls{
-    display:flex;
-    flex-wrap:wrap;
-    gap:15px;
-    justify-content:center;
 
-    margin-bottom:20px;
-}
+/* =====================================================
+   TABLETS
+===================================================== */
 
-.stats{
-    max-width:900px;
+@media (max-width: 900px) {
 
-    margin:auto;
+    .features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
-    margin-bottom:25px;
-}
+    .staff-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
 
-.progress-track{
+        gap: 18px;
+    }
 
-    width:100%;
+    .staff-card {
+        padding: 26px;
+    }
 
-    height:18px;
+    .staff-top {
+        gap: 15px;
+    }
 
-    border-radius:999px;
+    .staff-avatar {
+        width: 72px;
+        height: 72px;
 
-    overflow:hidden;
+        flex-basis: 72px;
 
-    background:#111;
-}
+        font-size: 1.9rem;
+    }
 
-.progress-fill{
-    height:100%;
-    width:0%;
-    background:linear-gradient(
-        90deg,
-        #39ff88,
-        #a5ff7c
-    );
-    transition:.3s;
-}
+    .staff-info h3 {
+        font-size: 1.15rem;
+    }
 
-.mastered-fill{
-    height:100%;
-    width:0%;
-    background:linear-gradient(
-        90deg,
-        #ffd700,
-        #ff9900
-    );
-    transition:.3s;
-}
-
-.percent{
-
-    margin-bottom:10px;
-
-    font-weight:700;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:14px;
-}
-
-@media(max-width:1400px){
-    .grid{
-        grid-template-columns:repeat(5,1fr);
+    .staff-role {
+        font-size: 0.7rem;
     }
 }
 
-@media(max-width:1200px){
-    .grid{
-        grid-template-columns:repeat(4,1fr);
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    nav {
+        padding: 14px 5%;
     }
-}
 
-@media(max-width:900px){
-    .grid{
-        grid-template-columns:repeat(3,1fr);
+    .logo {
+        font-size: 1rem;
     }
-}
 
-@media(max-width:600px){
-    .grid{
-        grid-template-columns:repeat(2,1fr);
+    .nav-links {
+        gap: 8px;
     }
-}
 
-.card{
+    .nav-links a:not(.nav-discord) {
+        display: none;
+    }
 
-    background:var(--card);
+    .nav-discord {
+        padding: 9px 12px;
 
-    border:1px solid var(--border);
+        font-size: 0.75rem !important;
+    }
 
-    border-radius:18px;
 
-    overflow:hidden;
+    /* HERO */
 
-    transition:.25s;
-}
+    .hero {
+        min-height: 92vh;
 
-.card:hover{
+        padding: 130px 18px 90px;
+    }
 
-    transform:translateY(-5px);
+    .hero h1 {
+        font-size: clamp(3rem, 16vw, 5rem);
 
-    border-color:var(--green);
-}
+        letter-spacing: -3px;
+    }
 
-.card img{
+    .hero-description {
+        font-size: 0.95rem;
 
-    width:100%;
+        line-height: 1.7;
+    }
 
-    height:220px;
+    .hero-buttons {
+        flex-direction: column;
 
-    object-fit:cover;
+        max-width: 320px;
 
-    background:#111;
-}
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-.content{
+    .button {
+        width: 100%;
+    }
 
-    padding:15px;
-}
 
-.name{
+    /* SECTIONS */
 
-    font-size:1.1rem;
+    section {
+        padding: 80px 5%;
+    }
 
-    font-weight:800;
 
-    margin-bottom:10px;
-}
+    /* FEATURES */
 
-.check{
+    .features {
+        grid-template-columns: 1fr;
+    }
 
-    display:flex;
 
-    align-items:center;
+    /* STAFF */
 
-    gap:10px;
+    .staff-grid {
+        grid-template-columns: 1fr;
 
-    margin-top:10px;
+        width: 100%;
 
-    cursor:pointer;
-}
+        gap: 18px;
+    }
 
-.check input{
+    .staff-card {
+        width: 100%;
 
-    transform:scale(1.15);
-}
+        padding: 22px;
 
-.crown{
+        border-radius: 18px;
+    }
 
-    color:gold;
-}
+    .staff-top {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
 
-.back{
+    .staff-avatar {
+        width: 68px;
+        height: 68px;
 
-    text-decoration:none;
+        flex-basis: 68px;
 
-    color:black;
+        font-size: 1.7rem;
+    }
 
-    background:var(--green);
+    .staff-info h3 {
+        font-size: 1.08rem;
+    }
 
-    padding:12px 18px;
+    .staff-role {
+        font-size: 0.66rem;
+    }
 
-    border-radius:12px;
+    .staff-description {
+        font-size: 0.88rem;
+    }
 
-    font-weight:700;
+    .staff-tags {
+        justify-content: center;
+    }
 
-    display:inline-block;
+    .discord-box {
+        padding: 55px 20px;
+    }
 
-    margin-bottom:30px;
-}
-.top-menu-btn{
-    position:fixed;
-    top:15px;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:1001;
-    background:#182050;
-    color:#fff;
-    border:1px solid rgba(255,255,255,.15);
-    padding:12px 20px;
-    border-radius:14px;
-    cursor:pointer;
-    font-weight:700;
-}
-
-.theme-toggle{
-position:absolute;
-top:20px;
-right:20px;
-z-index:1002;
-
-padding:12px 18px;
-border:none;
-border-radius:12px;
-
-background:#2b1248;
-color:white;
-
-font-weight:700;
-cursor:pointer;
-}
-
-body.light-mode{
-background:#dff6ff;
-color:#00263d;
-}
-
-body.light-mode .card{
-background:rgba(255,255,255,.9);
-border-color:rgba(0,0,0,.15);
-}
-
-body.light-mode input,
-body.light-mode select{
-background:white;
-color:#00263d;
-}
-
-body.light-mode .menu-content{
-background:linear-gradient(
-180deg,
-#c9f3ff,
-#e8fbff
-);
-color:#00263d;
-}
-
-body.light-mode .back{
-background:#56d9ff;
-color:#00263d;
-}
-    body.light-mode .controls button{
-    background:#56d9ff;
-    color:#00263d;
-}
-
-body.light-mode .theme-toggle{
-background:#56d9ff;
-color:#00263d;
+    .scroll-indicator {
+        display: none;
+    }
 }
 </style>
 </head>
-
 <body>
-    <button id="updateBtn" class="top-menu-btn">🔄 Update</button>
-    <button id="themeToggle" class="theme-toggle">
-☀️ Light Mode
-</button>
 
-<a href="index.html" class="back">
-    ⬅ Back To Home
-</a>
-<h1>✨ Sprite Index ✨</h1>
-<h1>✨ made by XPLUZOyt please subscribe ✨</h1>
+<canvas id="particles"></canvas>
 
-<div class="controls">
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
 
-<input
-type="text"
-id="search"
-placeholder="Search Sprite">
+<nav id="navbar">
+    <a href="#" class="logo">
+        <span class="logo-highlight">Xpluzo's</span> Hub
+    </a>
 
-<select id="filter">
+    <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#staff">Staff</a>
+        <a href="sprites.html">Sprites</a>
+        <a href="content-creators.html">Content Creators</a>
+        <a href="treasure.html">Treasure Hours</a>
+        <a href="https://discord.gg/RcxpDqEY7x" target="_blank" rel="noopener noreferrer" class="nav-discord">Discord</a>
+    </div>
+</nav>
 
-<option value="all">All</option>
-<option value="owned">Owned</option>
-<option value="missing">Missing</option>
+<main>
 
-</select>
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="status-dot"></span>
+            A growing gaming community
+        </div>
 
-<button onclick="exportSpriteSheet('missing')">
-❌ Missing
-</button>
+        <h1>
+            <span class="green">Xpluzo's</span>
+            Hub
+        </h1>
 
-<button onclick="exportSpriteSheet('collected')">
-✅ Collected
-</button>
+        <p class="hero-description">
+            A growing community built on trust, friendship, and nonstop fun.
+            Trade sprites, talk about games, discover news, enter giveaways,
+            and meet awesome people.
+        </p>
 
-<button onclick="exportSpriteSheet('nonmastered')">
-📦 Non-Mastered
-</button>
+        <div class="hero-buttons">
+            <a href="https://discord.gg/RcxpDqEY7x" target="_blank" rel="noopener noreferrer" class="button button-primary">
+                Join Our Discord
+            </a>
 
-<button onclick="exportSpriteSheet('mastered')">
-👑 Mastered
-</button>
-
-</div>
-
-
-<div class="stats">
-
-    <div id="statsText" class="percent">
-        📦 Collection 0/0 (0%)
+            <a href="#features" class="button button-secondary">
+                Explore Community
+            </a>
+        </div>
     </div>
 
-    <div class="progress-track">
-        <div id="progressFill" class="progress-fill"></div>
+    <div class="scroll-indicator">Scroll to explore ↓</div>
+</section>
+
+<section id="features">
+    <div class="section-heading reveal">
+        <div class="section-label">What We Offer</div>
+        <h2>Something for everyone.</h2>
+        <p>Xpluzo's Hub is built around gaming, creativity, community, and having a great time.</p>
     </div>
 
+    <div class="features">
+        <div class="feature-card reveal">
+            <div class="feature-icon">🎮</div>
+            <h3>Sprite Trading</h3>
+            <p>Trade, collect, and discover new sprites with other members of the community.</p>
+        </div>
 
-    <div id="masteredText" class="percent">
-        👑 Mastered 0/0 (0%)
+        <div class="feature-card reveal">
+            <div class="feature-icon">💬</div>
+            <h3>Chats For All Gamemodes</h3>
+            <p>Talk about your favorite games and connect with people who enjoy the same gamemodes.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">🎁</div>
+            <h3>Giveaways</h3>
+            <p>Take part in community giveaways, events, and exciting future activities.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">📰</div>
+            <h3>News & Leaks</h3>
+            <p>Stay up to date with gaming news, updates, discoveries, and community leaks.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">🏆</div>
+            <h3>Creator Support</h3>
+            <p>We support growing content creators and give them a place to share their work.</p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">🤝</div>
+            <h3>Friendly Community</h3>
+            <p>Meet new people, make friends, and enjoy a community centered around trust and fun.</p>
+        </div>
+    </div>
+</section>
+
+<section id="staff">
+    <div class="section-heading reveal">
+        <div class="section-label">Meet The Team</div>
+        <h2>The people behind Xpluzo's Hub.</h2>
+        <p>Meet some of the people helping build, manage, and grow our community.</p>
     </div>
 
-    <div class="progress-track">
-        <div id="masteredFill" class="mastered-fill"></div>
+    <div class="staff-grid">
+        <div class="staff-card reveal">
+            <div class="staff-top">
+                <div class="staff-avatar">
+                    <img src="channels4_profile (1).jpg" alt="XPLUZOyt">
+                </div>
+                <div class="staff-info">
+                    <h3>XPLUZOyt</h3>
+                    <span class="staff-role">Owner &amp; Website Creator</span>
+                </div>
+            </div>
+
+            <p class="staff-description">
+                Hey! I'm XPLUZOyt, the owner and creator of the Xpluzo's Hub website.
+                I handle a lot of the technical work and help keep things running smoothly
+                behind the scenes. If you see me in Discord, feel free to say hi!
+            </p>
+
+            <div class="staff-tags">
+                <span class="staff-tag">Developer</span>
+                <span class="staff-tag">Owner</span>
+                <span class="staff-tag">Website</span>
+            </div>
+        </div>
     </div>
+</section>
 
-</div>
+<section id="discord" class="discord-section">
+    <div class="discord-box reveal">
+        <h2>Ready to join us? 👋</h2>
+        <p>Come hang out with Xpluzo's Hub and become part of the community.</p>
 
-<div id="grid" class="grid"></div>
+        <a href="https://discord.gg/RcxpDqEY7x" target="_blank" rel="noopener noreferrer" class="button button-primary">
+            Join Xpluzo's Hub
+        </a>
+    </div>
+</section>
+</main>
+
+<footer>
+    <p>© 2026 <span>Xpluzo's Hub</span> — Built with ❤️ by the community.</p>
+</footer>
 
 <script>
 
-const spriteBases = [
-    "Halfpeel'd",
-    "Re-Pete",
-    "Barry O'Fish",
-    "Chester",
-    "Exmarks",
-    "Wayfinder",
-    "Kelper",
-    "Lil' Squibbly",
-    "Lil' Flacko",
-    "Lil' Uzi Vert Jr.",
-    "Plundarrgh",
-    "Squiplash",
-    "Mini Miku"
-];
+const navbar = document.getElementById("navbar");
 
-const variants = [
-    {
-        prefix:"",
-        variant:"Base"
-    },
-    {
-        prefix:"Fortune",
-        variant:"For"
-    },
-    {
-        prefix:"Cursed",
-        variant:"Cur"
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 30) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
     }
-];
+});
 
-let spriteId = 1;
+const revealElements = document.querySelectorAll(".reveal");
 
-const defaultSprites = [];
-
-// Generate all spriteBases first
-spriteBases.forEach(base => {
-
-    variants.forEach(v => {
-
-        const imageName =
-        `${v.prefix ? v.prefix.toLowerCase() + "-" : ""}${base
-            .toLowerCase()
-            .replace(/'/g,"")
-            .replace(/\./g,"")
-            .replace(/\s+/g,"-")
-        }.png`;
-
-        defaultSprites.push({
-            id: spriteId++,
-            name: v.prefix
-                ? `${v.prefix} ${base}`
-                : base,
-            variant: v.variant,
-            image: `images/${imageName}`
+const revealObserver = new IntersectionObserver(
+    entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+                revealObserver.unobserve(entry.target);
+            }
         });
+    },
+    { threshold: 0.12 }
+);
 
+revealElements.forEach(element => {
+    revealObserver.observe(element);
+});
+
+
+/* =====================================================
+   PARTICLES BACKGROUND
+===================================================== */
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+let width;
+let height;
+
+function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+
+window.addEventListener("resize", resizeCanvas);
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 1.8 + 0.4;
+        this.speedX = (Math.random() - 0.5) * 0.25;
+        this.speedY = (Math.random() - 0.5) * 0.25;
+        this.opacity = Math.random() * 0.55 + 0.15;
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(57,255,136,${this.opacity})`;
+        ctx.fill();
+    }
+}
+
+function createParticles() {
+    particles = [];
+    const amount = window.innerWidth < 700 ? 45 : 90;
+
+    for (let i = 0; i < amount; i++) {
+        particles.push(new Particle());
+    }
+}
+
+createParticles();
+
+function connectParticles() {
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 120) {
+                const opacity = 0.07 * (1 - distance / 120);
+
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(57,255,136,${opacity})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
     });
 
-});
-
-// Add special sprites LAST
-defaultSprites.push({
-    id: spriteId++,
-    name: "Transponder Snail",
-    variant: "Base",
-    image: "images/transponder-snail-base.png"
-});
-
-defaultSprites.push({
-    id: spriteId++,
-    name: "Sweet Dreams",
-    variant: "Base",
-    image: "images/sweet-dreams-base.png"
-});
-defaultSprites.push({
-    id: spriteId++,
-    name: "Zee",
-    variant: "Base",
-    image: "images/zee.png"
-});
-let sprites = [];
-
-try{
-    sprites =
-    JSON.parse(
-        localStorage.getItem("spriteCollection")
-    ) || [];
-}catch{
-    sprites = [];
+    connectParticles();
+    requestAnimationFrame(animateParticles);
 }
 
-if(!sprites || sprites.length < defaultSprites.length){
-
-    sprites =
-    defaultSprites.map(sprite => ({
-
-        ...sprite,
-
-        owned:false,
-
-        mastered:false
-
-    }));
-
-    localStorage.setItem(
-        "spriteCollection",
-        JSON.stringify(sprites)
-    );
-
-}
-
-function saveSprites(){
-
-localStorage.setItem(
-"spriteCollection",
-JSON.stringify(sprites)
-);
-
-}
-
-const grid =
-document.getElementById("grid");
-
-const statsText =
-document.getElementById("statsText");
-
-const progressFill =
-document.getElementById("progressFill");
-
-const masteredText =
-document.getElementById("masteredText");
-
-const masteredFill =
-document.getElementById("masteredFill");
-
-function updateStats(){
-
-    const owned =
-    sprites.filter(
-        s => s.owned
-    ).length;
-
-    const mastered =
-    sprites.filter(
-        s => s.mastered
-    ).length;
-
-    const total =
-    sprites.length;
-
-    const ownedPercent =
-    total > 0
-        ? Math.round((owned / total) * 100)
-        : 0;
-
-    const masteredPercent =
-    total > 0
-        ? Math.round((mastered / total) * 100)
-        : 0;
-
-    statsText.textContent =
-    `📦 Collection ${owned}/${total} (${ownedPercent}%)`;
-
-    progressFill.style.width =
-    ownedPercent + "%";
-
-    masteredText.textContent =
-    `👑 Mastered ${mastered}/${total} (${masteredPercent}%)`;
-
-    masteredFill.style.width =
-    masteredPercent + "%";
-
-}
-
-function render(){
-
-const search =
-document
-.getElementById("search")
-.value
-.toLowerCase();
-
-const filter =
-document
-.getElementById("filter")
-.value;
-
-grid.innerHTML="";
-
-sprites
-.filter(sprite=>{
-
-const matchesSearch =
-sprite.name
-.toLowerCase()
-.includes(search);
-
-if(filter==="owned")
-return matchesSearch &&
-sprite.owned;
-
-if(filter==="missing")
-return matchesSearch &&
-!sprite.owned;
-
-return matchesSearch;
-
-})
-
-.forEach(sprite=>{
-
-const card =
-document.createElement("div");
-
-card.className = "card";
-
-const borders = {
-
-Base:"#ffd700",
-Gold:"#ffd700",
-Cheat:"#2fff45",
-Hacker:"#e448ff",
-Hunter:"#39ff88",
-Trick:"#ff9c2b",
-Quack:"#b784ff"
-
-};
-
-card.style.border =
-`2px solid ${borders[sprite.variant] || "#444"}`;
-
-card.innerHTML =
-
-`
-<img src="${sprite.image}" alt="${sprite.name}">
-
-<div class="content">
-
-<div class="name">
-${sprite.name}
-</div>
-
-<div
-style="
-color:#39ff88;
-font-size:.8rem;
-margin-bottom:10px;
-font-weight:700;
-">
-
-${sprite.variant}
-
-</div>
-
-<label class="check">
-
-<input
-type="checkbox"
-${sprite.owned ? "checked" : ""}
-onchange="toggleOwned(${sprite.id})">
-
-✅ Owned
-
-</label>
-
-<label class="check">
-
-<input
-type="checkbox"
-${sprite.mastered ? "checked" : ""}
-onchange="toggleMastered(${sprite.id})">
-
-<span class="crown">👑</span>
-
-Mastered
-
-</label>
-
-</div>
-`;
-
-grid.appendChild(card);
-
-});
-
-updateStats();
-
-}
-
-function toggleOwned(id){
-
-    const sprite =
-    sprites.find(
-        s => s.id === id
-    );
-
-    sprite.owned = !sprite.owned;
-
-    if(!sprite.owned){
-        sprite.mastered = false;
-    }
-
-    saveSprites();
-    render();
-}
-
-function toggleMastered(id){
-    const sprite =
-    sprites.find(s=>s.id===id);
-
-    if(!sprite.owned){
-        alert("You must own a sprite before mastering it.");
-        return;
-    }
-
-    sprite.mastered = !sprite.mastered;
-
-    saveSprites();
-    render();
-}
-
-document
-.getElementById("search")
-.addEventListener(
-"input",
-render
-);
-
-document
-.getElementById("filter")
-.addEventListener(
-"change",
-render
-);
-    const themeToggle=
-document.getElementById("themeToggle");
-
-let lightMode=
-localStorage.getItem("lightMode")
-==="true";
-
-if(lightMode){
-
-document.body.classList.add(
-"light-mode"
-);
-
-themeToggle.textContent=
-"🌙 Dark Mode";
-
-}else{
-
-themeToggle.textContent=
-"☀️ Light Mode";
-
-}
-
-themeToggle.addEventListener(
-"click",
-()=>{
-
-lightMode=!lightMode;
-
-if(lightMode){
-
-document.body.classList.add(
-"light-mode"
-);
-
-themeToggle.textContent=
-"🌙 Dark Mode";
-
-}else{
-
-document.body.classList.remove(
-"light-mode"
-);
-
-themeToggle.textContent=
-"☀️ Light Mode";
-
-}
-
-localStorage.setItem(
-"lightMode",
-lightMode
-);
-
-}
-);
-
-const updateBtn =
-document.getElementById("updateBtn");
-
-updateBtn.addEventListener("click", () => {
-
-    if(!confirm(
-        "This will reset all saved data. Continue?"
-    )){
-        return;
-    }
-
-    localStorage.removeItem(
-        "spriteCollection"
-    );
-
-    localStorage.removeItem(
-        "lightMode"
-    );
-
-    location.reload();
-});
-async function exportSpriteSheet(type){
-
-    let filteredSprites = [];
-    let title = "";
-    let fileName = "";
-
-    switch(type){
-
-        case "missing":
-            filteredSprites =
-            sprites.filter(s => !s.owned);
-            title = "Missing";
-            fileName = "missing-sprites.png";
-            break;
-
-        case "collected":
-            filteredSprites =
-            sprites.filter(s => s.owned);
-            title = "Collected";
-            fileName = "collected-sprites.png";
-            break;
-
-        case "nonmastered":
-    filteredSprites =
-    sprites.filter(
-        s => s.owned && !s.mastered);
-            title = "Non-Mastered";
-            fileName = "non-mastered-sprites.png";
-            break;
-
-        case "mastered":
-            filteredSprites =
-            sprites.filter(s => s.mastered);
-            title = "Mastered";
-            fileName = "mastered-sprites.png";
-            break;
-    }
-
-    if(filteredSprites.length === 0){
-        alert("No sprites found.");
-        return;
-    }
-
-const columns = 14;
-const cardWidth = 120;
-const cardHeight = 140;
-const padding = 8;
-const headerHeight = 120;
-
-    const rows =
-    Math.ceil(filteredSprites.length / columns);
-
-    const canvas =
-    document.createElement("canvas");
-
-canvas.width =
-(columns * cardWidth) +
-((columns + 1) * padding);
-
-canvas.height =
-headerHeight +
-(rows * cardHeight) +
-((rows + 1) * padding);
-
-    const ctx =
-    canvas.getContext("2d");
-
-const bgGradient =
-ctx.createLinearGradient(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-);
-
-bgGradient.addColorStop(
-0,
-"#181a2c"
-);
-
-bgGradient.addColorStop(
-1,
-"#0c1218"
-);
-
-ctx.fillStyle =
-bgGradient;
-
-ctx.fillRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-ctx.textAlign = "center";
-
-ctx.fillStyle =
-"#ffffff";
-
-ctx.font =
-"bold 50px Arial";
-
-ctx.fillText(
-title.toUpperCase(),
-canvas.width / 2,
-55
-);
-
-ctx.fillStyle =
-"#39ff88";
-
-ctx.font =
-"bold 24px Arial";
-
-ctx.fillText(
-`${filteredSprites.length} SPRITES`,
-canvas.width / 2,
-95
-);
-
-    const imagePromises =
-    filteredSprites.map(sprite => {
-
-        return new Promise(resolve => {
-
-            const img = new Image();
-            img.crossOrigin = "anonymous";
-
-            img.onload = () =>
-            resolve({sprite,img});
-
-            img.onerror = () =>
-            resolve(null);
-
-            img.src = sprite.image;
-
-        });
-
-    });
-
-    const images =
-    await Promise.all(imagePromises);
-
-    images.forEach((entry,index)=>{
-
-        if(!entry) return;
-
-        const col =
-        index % columns;
-
-        const row =
-        Math.floor(index / columns);
-
-const x =
-padding +
-col * (cardWidth + padding);
-
-const y =
-headerHeight +
-row * (cardHeight + padding);
-
-       const rarityColors = {
-    Base:"#403b1d",
-    Gold:"#6f5600",
-    Cheat:"#245c11",
-    Hacker:"#3f1761",
-    Hunter:"#17324b",
-    Trick:"#6b3300",
-    Quack:"#4f2b7a"
-};
-
-ctx.fillStyle =
-rarityColors[
-entry.sprite.variant
-] || "#222";
-
-ctx.fillRect(
-x,
-y,
-cardWidth,
-cardHeight
-);
-
-ctx.strokeStyle =
-"#ffd700";
-
-ctx.lineWidth = 2;
-
-ctx.strokeRect(
-x,
-y,
-cardWidth,
-cardHeight
-);
-
-ctx.drawImage(
-entry.img,
-x + 10,
-y + 8,
-100,
-100
-);
-
-ctx.fillStyle =
-"#fff";
-
-ctx.font =
-"bold 10px Arial";
-
-let label =
-entry.sprite.name;
-
-if(label.length > 16){
-    label =
-    label.substring(0,14)
-    + "..";
-}
-
-ctx.fillText(
-label,
-x + cardWidth / 2,
-y + 125
-);
-    });
-
-    const link =
-    document.createElement("a");
-
-    link.download =
-    fileName;
-
-    link.href =
-    canvas.toDataURL("image/png");
-
-    link.click();
-}
-
-render();
-
+animateParticles();
+window.addEventListener("resize", createParticles);
 </script>
-
+<script src="account-widget.js" defer></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
