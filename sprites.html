@@ -1017,7 +1017,7 @@ y + 8,
 );
 
 ctx.fillStyle =
-"#ffffff";
+"#fff";
 
 ctx.font =
 "bold 10px Arial";
@@ -1028,7 +1028,7 @@ entry.sprite.name;
 if(label.length > 16){
     label =
     label.substring(0,14)
-    + "...";
+    + "..";
 }
 
 ctx.fillText(
@@ -1036,7 +1036,6 @@ label,
 x + cardWidth / 2,
 y + 125
 );
-
     });
 
     const link =
@@ -1049,12 +1048,10 @@ y + 125
     canvas.toDataURL("image/png");
 
     link.click();
-
 }
 
 render();
 
-<script src="account-widget.js" defer></script>
 </script>
 
 </body>
