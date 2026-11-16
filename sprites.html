@@ -1,287 +1,1058 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprite Index | XPLUZO's index</title>
-    <style>
-        :root {
-            --green: #39ff88;
-            --card: rgba(10,30,18,.75);
-            --border: rgba(57,255,136,.15);
-            --white: #f2fff6;
-            --muted: #91a69a;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<title>Sprite Index | XPLUZO's index</title>
 
-        body {
-            font-family: Inter, sans-serif;
-            background: #030806;
-            color: var(--white);
-            min-height: 100vh;
-            padding: 40px 20px;
-            transition: background-color .4s ease, color .4s ease;
-        }
+<style>
+input,
+select{
+    padding:12px 15px;
+    border:none;
+    border-radius:12px;
+    background:var(--card);
+    color:white;
+}
+.controls button{
+    padding:12px 18px;
+    border:none;
+    border-radius:12px;
+    background:var(--green);
+    color:black;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
 
-        .back {
-            text-decoration: none;
-            color: black;
-            background: var(--green);
-            padding: 12px 18px;
-            border-radius: 12px;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
+.controls button:hover{
+    opacity:.9;
+}
 
-        h1 {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+:root{
+    --green:#39ff88;
+    --card:rgba(10,30,18,.75);
+    --border:rgba(57,255,136,.15);
+    --white:#f2fff6;
+    --muted:#91a69a;
+}
 
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+    body,
+.card,
+input,
+select,
+.back,
+.theme-toggle,
+.progress-track,
+.progress-fill,
+.mastered-fill{
+transition:
+background-color .4s ease,
+background .4s ease,
+color .4s ease,
+border-color .4s ease,
+box-shadow .4s ease,
+opacity .4s ease;
+}
 
-        input, select, button {
-            padding: 12px 15px;
-            border: none;
-            border-radius: 12px;
-            background: var(--card);
-            color: white;
-            font: inherit;
-        }
+body{
+    font-family:Inter,sans-serif;
+    background:#030806;
+    color:var(--white);
 
-        .controls button {
-            background: var(--green);
-            color: black;
-            font-weight: 700;
-            cursor: pointer;
-        }
+    min-height:100vh;
 
-        .stats {
-            max-width: 900px;
-            margin: auto;
-            margin-bottom: 25px;
-        }
+    padding:40px;
 
-        .progress-track {
-            width: 100%;
-            height: 18px;
-            border-radius: 999px;
-            overflow: hidden;
-            background: #111;
-        }
+    transition:
+    background-color .5s ease,
+    color .5s ease;
+}
 
-        .progress-fill, .mastered-fill {
-            height: 100%;
-            width: 0%;
-            transition: .3s;
-        }
+h1{
+    text-align:center;
+    margin-bottom:25px;
+}
 
-        .progress-fill {
-            background: linear-gradient(90deg, #39ff88, #a5ff7c);
-        }
+.controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    justify-content:center;
 
-        .mastered-fill {
-            background: linear-gradient(90deg, #ffd700, #ff9900);
-        }
+    margin-bottom:20px;
+}
 
-        .percent {
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
+.stats{
+    max-width:900px;
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(6, minmax(0, 1fr));
-            gap: 14px;
-        }
+    margin:auto;
 
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            overflow: hidden;
-            transition: .25s ease;
-        }
+    margin-bottom:25px;
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--green);
-        }
+.progress-track{
 
-        .card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            background: #111;
-        }
+    width:100%;
 
-        .content {
-            padding: 15px;
-        }
+    height:18px;
 
-        .name {
-            font-size: 1.1rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
+    border-radius:999px;
 
-        .check {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
+    overflow:hidden;
 
-        .check input { transform: scale(1.15); }
-        .crown { color: gold; }
+    background:#111;
+}
 
-        @media (max-width: 1400px) { .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
-        @media (max-width: 1200px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-        @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-        @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    </style>
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(
+        90deg,
+        #39ff88,
+        #a5ff7c
+    );
+    transition:.3s;
+}
+
+.mastered-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(
+        90deg,
+        #ffd700,
+        #ff9900
+    );
+    transition:.3s;
+}
+
+.percent{
+
+    margin-bottom:10px;
+
+    font-weight:700;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:14px;
+}
+
+@media(max-width:1400px){
+    .grid{
+        grid-template-columns:repeat(5,1fr);
+    }
+}
+
+@media(max-width:1200px){
+    .grid{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+
+@media(max-width:900px){
+    .grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+.card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    transition:.25s;
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:var(--green);
+}
+
+.card img{
+
+    width:100%;
+
+    height:220px;
+
+    object-fit:cover;
+
+    background:#111;
+}
+
+.content{
+
+    padding:15px;
+}
+
+.name{
+
+    font-size:1.1rem;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+}
+
+.check{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:10px;
+
+    cursor:pointer;
+}
+
+.check input{
+
+    transform:scale(1.15);
+}
+
+.crown{
+
+    color:gold;
+}
+
+.back{
+
+    text-decoration:none;
+
+    color:black;
+
+    background:var(--green);
+
+    padding:12px 18px;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    display:inline-block;
+
+    margin-bottom:30px;
+}
+.top-menu-btn{
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:1001;
+    background:#182050;
+    color:#fff;
+    border:1px solid rgba(255,255,255,.15);
+    padding:12px 20px;
+    border-radius:14px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.theme-toggle{
+position:absolute;
+top:20px;
+right:20px;
+z-index:1002;
+
+padding:12px 18px;
+border:none;
+border-radius:12px;
+
+background:#2b1248;
+color:white;
+
+font-weight:700;
+cursor:pointer;
+}
+
+body.light-mode{
+background:#dff6ff;
+color:#00263d;
+}
+
+body.light-mode .card{
+background:rgba(255,255,255,.9);
+border-color:rgba(0,0,0,.15);
+}
+
+body.light-mode input,
+body.light-mode select{
+background:white;
+color:#00263d;
+}
+
+body.light-mode .menu-content{
+background:linear-gradient(
+180deg,
+#c9f3ff,
+#e8fbff
+);
+color:#00263d;
+}
+
+body.light-mode .back{
+background:#56d9ff;
+color:#00263d;
+}
+    body.light-mode .controls button{
+    background:#56d9ff;
+    color:#00263d;
+}
+
+body.light-mode .theme-toggle{
+background:#56d9ff;
+color:#00263d;
+}
+</style>
 </head>
+
 <body>
-    <a href="index.html" class="back">⬅ Back To Home</a>
-    <h1>✨ Sprite Index ✨</h1>
-    <h1>✨ made by XPLUZOyt please subscribe ✨</h1>
+    <button id="updateBtn" class="top-menu-btn">🔄 Update</button>
+    <button id="themeToggle" class="theme-toggle">
+☀️ Light Mode
+</button>
 
-    <div class="controls">
-        <input type="text" id="search" placeholder="Search Sprite">
-        <select id="filter">
-            <option value="all">All</option>
-            <option value="owned">Owned</option>
-            <option value="missing">Missing</option>
-        </select>
-        <button onclick="exportSpriteSheet('missing')">❌ Missing</button>
-        <button onclick="exportSpriteSheet('collected')">✅ Collected</button>
-        <button onclick="exportSpriteSheet('nonmastered')">📦 Non-Mastered</button>
-        <button onclick="exportSpriteSheet('mastered')">👑 Mastered</button>
+<a href="index.html" class="back">
+    ⬅ Back To Home
+</a>
+<h1>✨ Sprite Index ✨</h1>
+<h1>✨ made by XPLUZOyt please subscribe ✨</h1>
+
+<div class="controls">
+
+<input
+type="text"
+id="search"
+placeholder="Search Sprite">
+
+<select id="filter">
+
+<option value="all">All</option>
+<option value="owned">Owned</option>
+<option value="missing">Missing</option>
+
+</select>
+
+<button onclick="exportSpriteSheet('missing')">
+❌ Missing
+</button>
+
+<button onclick="exportSpriteSheet('collected')">
+✅ Collected
+</button>
+
+<button onclick="exportSpriteSheet('nonmastered')">
+📦 Non-Mastered
+</button>
+
+<button onclick="exportSpriteSheet('mastered')">
+👑 Mastered
+</button>
+
+</div>
+
+
+<div class="stats">
+
+    <div id="statsText" class="percent">
+        📦 Collection 0/0 (0%)
     </div>
 
-    <div class="stats">
-        <div id="statsText" class="percent">📦 Collection 0/0 (0%)</div>
-        <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
-        <div id="masteredText" class="percent">👑 Mastered 0/0 (0%)</div>
-        <div class="progress-track"><div id="masteredFill" class="mastered-fill"></div></div>
+    <div class="progress-track">
+        <div id="progressFill" class="progress-fill"></div>
     </div>
 
-    <div id="grid" class="grid"></div>
 
-    <script src="account-widget.js" defer></script>
-    <script>
-        const spriteBases = ["Halfpeel'd", "Re-Pete", "Barry O'Fish", "Chester", "Exmarks", "Wayfinder", "Kelper", "Lil' Squibbly", "Lil' Flacko", "Lil' Uzi Vert Jr.", "Plundarrgh", "Squiplash", "Mini Miku"];
-        const variants = [{ prefix: "", variant: "Base" }, { prefix: "Fortune", variant: "For" }, { prefix: "Cursed", variant: "Cur" }];
+    <div id="masteredText" class="percent">
+        👑 Mastered 0/0 (0%)
+    </div>
 
-        let spriteId = 1;
-        const defaultSprites = [];
+    <div class="progress-track">
+        <div id="masteredFill" class="mastered-fill"></div>
+    </div>
 
-        spriteBases.forEach(base => {
-            variants.forEach(v => {
-                const imageName = `${v.prefix ? v.prefix.toLowerCase() + '-' : ''}${base.toLowerCase().replace(/'/g, '').replace(/\./g, '').replace(/\s+/g, '-')}.png`;
-                defaultSprites.push({ id: spriteId++, name: v.prefix ? `${v.prefix} ${base}` : base, variant: v.variant, image: `images/${imageName}` });
-            });
+</div>
+
+<div id="grid" class="grid"></div>
+
+<script>
+
+const spriteBases = [
+    "Halfpeel'd",
+    "Re-Pete",
+    "Barry O'Fish",
+    "Chester",
+    "Exmarks",
+    "Wayfinder",
+    "Kelper",
+    "Lil' Squibbly",
+    "Lil' Flacko",
+    "Lil' Uzi Vert Jr.",
+    "Plundarrgh",
+    "Squiplash",
+    "Mini Miku"
+];
+
+const variants = [
+    {
+        prefix:"",
+        variant:"Base"
+    },
+    {
+        prefix:"Fortune",
+        variant:"For"
+    },
+    {
+        prefix:"Cursed",
+        variant:"Cur"
+    }
+];
+
+let spriteId = 1;
+
+const defaultSprites = [];
+
+// Generate all spriteBases first
+spriteBases.forEach(base => {
+
+    variants.forEach(v => {
+
+        const imageName =
+        `${v.prefix ? v.prefix.toLowerCase() + "-" : ""}${base
+            .toLowerCase()
+            .replace(/'/g,"")
+            .replace(/\./g,"")
+            .replace(/\s+/g,"-")
+        }.png`;
+
+        defaultSprites.push({
+            id: spriteId++,
+            name: v.prefix
+                ? `${v.prefix} ${base}`
+                : base,
+            variant: v.variant,
+            image: `images/${imageName}`
         });
 
-        defaultSprites.push({ id: spriteId++, name: "Transponder Snail", variant: "Base", image: "images/transponder-snail-base.png" });
-        defaultSprites.push({ id: spriteId++, name: "Sweet Dreams", variant: "Base", image: "images/sweet-dreams-base.png" });
-        defaultSprites.push({ id: spriteId++, name: "Zee", variant: "Base", image: "images/zee.png" });
+    });
 
-        let sprites = [];
-        try {
-            sprites = JSON.parse(localStorage.getItem("spriteCollection")) || [];
-        } catch {
-            sprites = [];
-        }
+});
 
-        if (!sprites || sprites.length < defaultSprites.length) {
-            sprites = defaultSprites.map(sprite => ({ ...sprite, owned: false, mastered: false }));
-            localStorage.setItem("spriteCollection", JSON.stringify(sprites));
-        }
+// Add special sprites LAST
+defaultSprites.push({
+    id: spriteId++,
+    name: "Transponder Snail",
+    variant: "Base",
+    image: "images/transponder-snail-base.png"
+});
 
-        function saveSprites() {
-            localStorage.setItem("spriteCollection", JSON.stringify(sprites));
-        }
+defaultSprites.push({
+    id: spriteId++,
+    name: "Sweet Dreams",
+    variant: "Base",
+    image: "images/sweet-dreams-base.png"
+});
+defaultSprites.push({
+    id: spriteId++,
+    name: "Zee",
+    variant: "Base",
+    image: "images/zee.png"
+});
+let sprites = [];
 
-        const grid = document.getElementById("grid");
-        const statsText = document.getElementById("statsText");
-        const progressFill = document.getElementById("progressFill");
-        const masteredText = document.getElementById("masteredText");
-        const masteredFill = document.getElementById("masteredFill");
+try{
+    sprites =
+    JSON.parse(
+        localStorage.getItem("spriteCollection")
+    ) || [];
+}catch{
+    sprites = [];
+}
 
-        function updateStats() {
-            const owned = sprites.filter(s => s.owned).length;
-            const mastered = sprites.filter(s => s.mastered).length;
-            const total = sprites.length;
-            const ownedPercent = total > 0 ? Math.round((owned / total) * 100) : 0;
-            const masteredPercent = total > 0 ? Math.round((mastered / total) * 100) : 0;
+if(!sprites || sprites.length < defaultSprites.length){
 
-            statsText.textContent = `📦 Collection ${owned}/${total} (${ownedPercent}%)`;
-            progressFill.style.width = ownedPercent + "%";
-            masteredText.textContent = `👑 Mastered ${mastered}/${total} (${masteredPercent}%)`;
-            masteredFill.style.width = masteredPercent + "%";
-        }
+    sprites =
+    defaultSprites.map(sprite => ({
 
-        function render() {
-            const search = document.getElementById("search").value.toLowerCase();
-            const filter = document.getElementById("filter").value;
+        ...sprite,
 
-            grid.innerHTML = "";
-            sprites.filter(sprite => {
-                const matchesSearch = sprite.name.toLowerCase().includes(search);
-                if (filter === "owned") return matchesSearch && sprite.owned;
-                if (filter === "missing") return matchesSearch && !sprite.owned;
-                return matchesSearch;
-            }).forEach(sprite => {
-                const card = document.createElement("div");
-                card.className = "card";
-                const borders = { Base: "#ffd700", Gold: "#ffd700", Cheat: "#2fff45", Hacker: "#e448ff", Hunter: "#39ff88", Trick: "#ff9c2b", Quack: "#b784ff" };
-                card.style.border = `2px solid ${borders[sprite.variant] || "#444"}`;
-                card.innerHTML = `
-                    <img src="${sprite.image}" alt="${sprite.name}">
-                    <div class="content">
-                        <div class="name">${sprite.name}</div>
-                        <div style="color:#39ff88; font-size:.8rem; margin-bottom:10px; font-weight:700;">${sprite.variant}</div>
-                        <label class="check"><input type="checkbox" ${sprite.owned ? "checked" : ""} onchange="toggleOwned(${sprite.id})"> ✅ Owned</label>
-                        <label class="check"><input type="checkbox" ${sprite.mastered ? "checked" : ""} onchange="toggleMastered(${sprite.id})"><span class="crown">👑</span> Mastered</label>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-            updateStats();
-        }
+        owned:false,
 
-        function toggleOwned(id) {
-            const sprite = sprites.find(s => s.id === id);
-            sprite.owned = !sprite.owned;
-            if (!sprite.owned) sprite.mastered = false;
-            saveSprites();
-            render();
-        }
+        mastered:false
 
-        function toggleMastered(id) {
-            const sprite = sprites.find(s => s.id === id);
-            if (!sprite.owned) {
-                alert("You must own a sprite before mastering it.");
-                return;
-            }
-            sprite.mastered = !sprite.mastered;
-            saveSprites();
-            render();
-        }
+    }));
 
-        document.getElementById("search").addEventListener("input", render);
-        document.getElementById("filter").addEventListener("change", render);
-        render();
-    </script>
+    localStorage.setItem(
+        "spriteCollection",
+        JSON.stringify(sprites)
+    );
+
+}
+
+function saveSprites(){
+
+localStorage.setItem(
+"spriteCollection",
+JSON.stringify(sprites)
+);
+
+}
+
+const grid =
+document.getElementById("grid");
+
+const statsText =
+document.getElementById("statsText");
+
+const progressFill =
+document.getElementById("progressFill");
+
+const masteredText =
+document.getElementById("masteredText");
+
+const masteredFill =
+document.getElementById("masteredFill");
+
+function updateStats(){
+
+    const owned =
+    sprites.filter(
+        s => s.owned
+    ).length;
+
+    const mastered =
+    sprites.filter(
+        s => s.mastered
+    ).length;
+
+    const total =
+    sprites.length;
+
+    const ownedPercent =
+    total > 0
+        ? Math.round((owned / total) * 100)
+        : 0;
+
+    const masteredPercent =
+    total > 0
+        ? Math.round((mastered / total) * 100)
+        : 0;
+
+    statsText.textContent =
+    `📦 Collection ${owned}/${total} (${ownedPercent}%)`;
+
+    progressFill.style.width =
+    ownedPercent + "%";
+
+    masteredText.textContent =
+    `👑 Mastered ${mastered}/${total} (${masteredPercent}%)`;
+
+    masteredFill.style.width =
+    masteredPercent + "%";
+
+}
+
+function render(){
+
+const search =
+document
+.getElementById("search")
+.value
+.toLowerCase();
+
+const filter =
+document
+.getElementById("filter")
+.value;
+
+grid.innerHTML="";
+
+sprites
+.filter(sprite=>{
+
+const matchesSearch =
+sprite.name
+.toLowerCase()
+.includes(search);
+
+if(filter==="owned")
+return matchesSearch &&
+sprite.owned;
+
+if(filter==="missing")
+return matchesSearch &&
+!sprite.owned;
+
+return matchesSearch;
+
+})
+
+.forEach(sprite=>{
+
+const card =
+document.createElement("div");
+
+card.className = "card";
+
+const borders = {
+
+Base:"#ffd700",
+Gold:"#ffd700",
+Cheat:"#2fff45",
+Hacker:"#e448ff",
+Hunter:"#39ff88",
+Trick:"#ff9c2b",
+Quack:"#b784ff"
+
+};
+
+card.style.border =
+`2px solid ${borders[sprite.variant] || "#444"}`;
+
+card.innerHTML =
+
+`
+<img src="${sprite.image}" alt="${sprite.name}">
+
+<div class="content">
+
+<div class="name">
+${sprite.name}
+</div>
+
+<div
+style="
+color:#39ff88;
+font-size:.8rem;
+margin-bottom:10px;
+font-weight:700;
+">
+
+${sprite.variant}
+
+</div>
+
+<label class="check">
+
+<input
+type="checkbox"
+${sprite.owned ? "checked" : ""}
+onchange="toggleOwned(${sprite.id})">
+
+✅ Owned
+
+</label>
+
+<label class="check">
+
+<input
+type="checkbox"
+${sprite.mastered ? "checked" : ""}
+onchange="toggleMastered(${sprite.id})">
+
+<span class="crown">👑</span>
+
+Mastered
+
+</label>
+
+</div>
+`;
+
+grid.appendChild(card);
+
+});
+
+updateStats();
+
+}
+
+function toggleOwned(id){
+
+    const sprite =
+    sprites.find(
+        s => s.id === id
+    );
+
+    sprite.owned = !sprite.owned;
+
+    if(!sprite.owned){
+        sprite.mastered = false;
+    }
+
+    saveSprites();
+    render();
+}
+
+function toggleMastered(id){
+    const sprite =
+    sprites.find(s=>s.id===id);
+
+    if(!sprite.owned){
+        alert("You must own a sprite before mastering it.");
+        return;
+    }
+
+    sprite.mastered = !sprite.mastered;
+
+    saveSprites();
+    render();
+}
+
+document
+.getElementById("search")
+.addEventListener(
+"input",
+render
+);
+
+document
+.getElementById("filter")
+.addEventListener(
+"change",
+render
+);
+    const themeToggle=
+document.getElementById("themeToggle");
+
+let lightMode=
+localStorage.getItem("lightMode")
+==="true";
+
+if(lightMode){
+
+document.body.classList.add(
+"light-mode"
+);
+
+themeToggle.textContent=
+"🌙 Dark Mode";
+
+}else{
+
+themeToggle.textContent=
+"☀️ Light Mode";
+
+}
+
+themeToggle.addEventListener(
+"click",
+()=>{
+
+lightMode=!lightMode;
+
+if(lightMode){
+
+document.body.classList.add(
+"light-mode"
+);
+
+themeToggle.textContent=
+"🌙 Dark Mode";
+
+}else{
+
+document.body.classList.remove(
+"light-mode"
+);
+
+themeToggle.textContent=
+"☀️ Light Mode";
+
+}
+
+localStorage.setItem(
+"lightMode",
+lightMode
+);
+
+}
+);
+
+const updateBtn =
+document.getElementById("updateBtn");
+
+updateBtn.addEventListener("click", () => {
+
+    if(!confirm(
+        "This will reset all saved data. Continue?"
+    )){
+        return;
+    }
+
+    localStorage.removeItem(
+        "spriteCollection"
+    );
+
+    localStorage.removeItem(
+        "lightMode"
+    );
+
+    location.reload();
+});
+async function exportSpriteSheet(type){
+
+    let filteredSprites = [];
+    let title = "";
+    let fileName = "";
+
+    switch(type){
+
+        case "missing":
+            filteredSprites =
+            sprites.filter(s => !s.owned);
+            title = "Missing";
+            fileName = "missing-sprites.png";
+            break;
+
+        case "collected":
+            filteredSprites =
+            sprites.filter(s => s.owned);
+            title = "Collected";
+            fileName = "collected-sprites.png";
+            break;
+
+        case "nonmastered":
+    filteredSprites =
+    sprites.filter(
+        s => s.owned && !s.mastered);
+            title = "Non-Mastered";
+            fileName = "non-mastered-sprites.png";
+            break;
+
+        case "mastered":
+            filteredSprites =
+            sprites.filter(s => s.mastered);
+            title = "Mastered";
+            fileName = "mastered-sprites.png";
+            break;
+    }
+
+    if(filteredSprites.length === 0){
+        alert("No sprites found.");
+        return;
+    }
+
+const columns = 14;
+const cardWidth = 120;
+const cardHeight = 140;
+const padding = 8;
+const headerHeight = 120;
+
+    const rows =
+    Math.ceil(filteredSprites.length / columns);
+
+    const canvas =
+    document.createElement("canvas");
+
+canvas.width =
+(columns * cardWidth) +
+((columns + 1) * padding);
+
+canvas.height =
+headerHeight +
+(rows * cardHeight) +
+((rows + 1) * padding);
+
+    const ctx =
+    canvas.getContext("2d");
+
+const bgGradient =
+ctx.createLinearGradient(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+);
+
+bgGradient.addColorStop(
+0,
+"#181a2c"
+);
+
+bgGradient.addColorStop(
+1,
+"#0c1218"
+);
+
+ctx.fillStyle =
+bgGradient;
+
+ctx.fillRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+ctx.textAlign = "center";
+
+ctx.fillStyle =
+"#ffffff";
+
+ctx.font =
+"bold 50px Arial";
+
+ctx.fillText(
+title.toUpperCase(),
+canvas.width / 2,
+55
+);
+
+ctx.fillStyle =
+"#39ff88";
+
+ctx.font =
+"bold 24px Arial";
+
+ctx.fillText(
+`${filteredSprites.length} SPRITES`,
+canvas.width / 2,
+95
+);
+
+    const imagePromises =
+    filteredSprites.map(sprite => {
+
+        return new Promise(resolve => {
+
+            const img = new Image();
+            img.crossOrigin = "anonymous";
+
+            img.onload = () =>
+            resolve({sprite,img});
+
+            img.onerror = () =>
+            resolve(null);
+
+            img.src = sprite.image;
+
+        });
+
+    });
+
+    const images =
+    await Promise.all(imagePromises);
+
+    images.forEach((entry,index)=>{
+
+        if(!entry) return;
+
+        const col =
+        index % columns;
+
+        const row =
+        Math.floor(index / columns);
+
+const x =
+padding +
+col * (cardWidth + padding);
+
+const y =
+headerHeight +
+row * (cardHeight + padding);
+
+       const rarityColors = {
+    Base:"#403b1d",
+    Gold:"#6f5600",
+    Cheat:"#245c11",
+    Hacker:"#3f1761",
+    Hunter:"#17324b",
+    Trick:"#6b3300",
+    Quack:"#4f2b7a"
+};
+
+ctx.fillStyle =
+rarityColors[
+entry.sprite.variant
+] || "#222";
+
+ctx.fillRect(
+x,
+y,
+cardWidth,
+cardHeight
+);
+
+ctx.strokeStyle =
+"#ffd700";
+
+ctx.lineWidth = 2;
+
+ctx.strokeRect(
+x,
+y,
+cardWidth,
+cardHeight
+);
+
+ctx.drawImage(
+entry.img,
+x + 10,
+y + 8,
+100,
+100
+);
+
+ctx.fillStyle =
+"#fff";
+
+ctx.font =
+"bold 10px Arial";
+
+let label =
+entry.sprite.name;
+
+if(label.length > 16){
+    label =
+    label.substring(0,14)
+    + "..";
+}
+
+ctx.fillText(
+label,
+x + cardWidth / 2,
+y + 125
+);
+    });
+
+    const link =
+    document.createElement("a");
+
+    link.download =
+    fileName;
+
+    link.href =
+    canvas.toDataURL("image/png");
+
+    link.click();
+}
+
+render();
+
+</script>
+
 </body>
 </html>
